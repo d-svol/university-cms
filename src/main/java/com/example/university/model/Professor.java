@@ -5,7 +5,6 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.util.Collection;
-import java.util.List;
 
 
 @Entity
@@ -17,8 +16,7 @@ import java.util.List;
 @ToString
 @Table(name = "professors")
 public class Professor extends User {
-    @ManyToOne
-    @JoinColumn(name = "faculty")
+    @Column(name = "faculty")
     private String faculty;
 
     @ManyToMany(fetch = FetchType.LAZY)

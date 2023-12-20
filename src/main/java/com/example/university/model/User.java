@@ -16,11 +16,10 @@ import lombok.experimental.SuperBuilder;
 @Table(name = "users", schema = "university")
 @Inheritance(strategy = InheritanceType.JOINED)
 abstract class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    protected long userId;
+    protected Long userId;
 
     @Column(name = "first_name")
     protected String firstName;
