@@ -3,12 +3,20 @@ package com.example.university.service.impl;
 import com.example.university.model.Professor;
 import com.example.university.repository.ProfessorRepository;
 import com.example.university.service.ProfessorService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class ProfessorServiceImpl implements ProfessorService {
-    private ProfessorRepository professorRepository;
+    private final ProfessorRepository professorRepository;
+
+    @Autowired
+    public ProfessorServiceImpl(ProfessorRepository professorRepository) {
+        this.professorRepository = professorRepository;
+    }
 
     @Override
     public Optional<Professor> findById(long id) {

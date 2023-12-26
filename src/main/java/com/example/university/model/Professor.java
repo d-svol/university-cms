@@ -8,13 +8,12 @@ import java.util.Collection;
 
 
 @Entity
-@SuperBuilder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @ToString
-@Table(name = "professors")
+@Table(name = "professors", schema = "university")
 public class Professor extends User {
     @Column(name = "faculty")
     private String faculty;
@@ -23,7 +22,7 @@ public class Professor extends User {
     @JoinTable(
             name = "professors_courses",
             schema = "university",
-            joinColumns = @JoinColumn(name = "user_id"),
+            joinColumns = @JoinColumn(name = "professor_id"),
             inverseJoinColumns = @JoinColumn(name = "course_id"))
     @ToString.Exclude
     private Collection<Course> courses;

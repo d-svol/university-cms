@@ -1,5 +1,27 @@
 ![UML діаграма](diagram.png)
 
+## Getting Started
+
+To ensure the proper functioning of the project, follow these steps
+
+1. Start Docker for easy environment setup:
+
+    ```bash
+    docker-compose up
+    ```
+
+   This will automatically configure all necessary dependencies and launch your application.
+
+2. Run the project
+
+3. After a successful Docker startup, open your web browser and go to:
+
+   [http://localhost:8080/](http://localhost:8080/)
+
+   Here, you will find your application up and running.
+
+## Other Important Steps
+
 **User Stories:**
 
 1. **Teacher Views Daily Timetable:**

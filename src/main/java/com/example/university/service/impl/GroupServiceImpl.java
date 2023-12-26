@@ -4,6 +4,7 @@ package com.example.university.service.impl;
 import com.example.university.model.Group;
 import com.example.university.repository.GroupRepository;
 import com.example.university.service.GroupService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +12,12 @@ import java.util.Optional;
 
 @Service
 public class GroupServiceImpl implements GroupService {
-    private GroupRepository groupRepository;
+    private final GroupRepository groupRepository;
+
+    @Autowired
+    public GroupServiceImpl(GroupRepository groupRepository) {
+        this.groupRepository = groupRepository;
+    }
 
     @Override
     public Optional<Group> findById(long id) {

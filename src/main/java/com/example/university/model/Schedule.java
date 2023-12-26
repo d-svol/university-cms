@@ -7,7 +7,6 @@ import java.sql.Time;
 import java.time.LocalDateTime;
 
 @Entity
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -17,11 +16,10 @@ import java.time.LocalDateTime;
 public class Schedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Long scheduleId;
+    private Long id;
 
     @OneToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "professor_id")
     private Professor professor;
 
     @OneToOne

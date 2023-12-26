@@ -4,6 +4,7 @@ package com.example.university.service.impl;
 import com.example.university.model.Schedule;
 import com.example.university.repository.ScheduleRepository;
 import com.example.university.service.ScheduleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +12,12 @@ import java.util.Optional;
 
 @Service
 public class ScheduleServiceImpl implements ScheduleService {
-    private ScheduleRepository scheduleRepository;
+    private final ScheduleRepository scheduleRepository;
+
+    @Autowired
+    public ScheduleServiceImpl(ScheduleRepository scheduleRepository) {
+        this.scheduleRepository = scheduleRepository;
+    }
 
     @Override
     public Optional<Schedule> findById(long id) {

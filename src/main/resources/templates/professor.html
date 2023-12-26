@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Professors</title>
+	<th:block th:insert="~{fragments/header :: header}"></th:block>
+</head>
+<body>
+<table>
+	<thead>
+	<tr>
+		<th>ID</th>
+		<th>Name</th>
+		<th>Surname</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr th:each="professor : ${professors}">
+		<td th:text="${professor.id} ?: ''"></td>
+		<td th:text="${professor.firstName} ?: ''"></td>
+		<td th:text="${professor.lastName} ?: ''"></td>
+	</tr>
+	</tbody>
+</table>
+
+</body>
+</html>

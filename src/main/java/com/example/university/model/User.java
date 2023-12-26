@@ -2,24 +2,17 @@ package com.example.university.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import lombok.experimental.SuperBuilder;
 
-@SuperBuilder
-@NoArgsConstructor
-@Entity
 @Getter
 @Setter
 @ToString
-@Table(name = "users", schema = "university")
-@Inheritance(strategy = InheritanceType.JOINED)
-abstract class User {
+@MappedSuperclass
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
-    protected Long userId;
+    protected Long id;
 
     @Column(name = "first_name")
     protected String firstName;

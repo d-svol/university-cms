@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Group</title>
+	<th:block th:insert="~{fragments/header :: header}"></th:block>
+</head>
+<body>
+<table>
+	<thead>
+	<tr>
+		<th>ID</th>
+		<th>Group Name</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr th:each="group : ${groups}">
+		<td th:text="${group.id}"></td>
+		<td th:text="${group.groupName}"></td>
+	</tr>
+	</tbody>
+</table>
+</body>
+</html>

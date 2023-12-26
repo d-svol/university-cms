@@ -4,6 +4,7 @@ package com.example.university.service.impl;
 import com.example.university.model.Course;
 import com.example.university.repository.CourseRepository;
 import com.example.university.service.CourseService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +12,12 @@ import java.util.Optional;
 
 @Service
 public class CourseServiceImpl implements CourseService {
-    private CourseRepository courseRepository;
+    private final CourseRepository courseRepository;
+
+    @Autowired
+    public CourseServiceImpl(CourseRepository courseRepository) {
+        this.courseRepository = courseRepository;
+    }
 
     @Override
     public Optional<Course> findById(long id) {
