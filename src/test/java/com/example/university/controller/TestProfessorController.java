@@ -1,7 +1,6 @@
 package com.example.university.controller;
 
 import com.example.university.model.Professor;
-import com.example.university.service.GroupService;
 import com.example.university.service.ProfessorService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;

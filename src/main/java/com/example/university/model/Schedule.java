@@ -3,7 +3,6 @@ package com.example.university.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.sql.Time;
 import java.time.LocalDateTime;
 
 @Entity
