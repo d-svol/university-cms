@@ -2,7 +2,6 @@ package com.example.university.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 import java.util.Collection;
 
@@ -26,4 +25,8 @@ public class Professor extends User {
             inverseJoinColumns = @JoinColumn(name = "course_id"))
     @ToString.Exclude
     private Collection<Course> courses;
+
+    public Professor(Long id, String firstName, String lastName) {
+        super(id, firstName, lastName);
+    }
 }

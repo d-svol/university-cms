@@ -30,4 +30,9 @@ public class Group {
     )
     @ToString.Exclude
     private List<Course> courses = new ArrayList<>();
+
+    public Group(Long id, String groupName) {
+        this.id = id;
+        this.groupName = groupName;
+    }
 }

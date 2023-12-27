@@ -1,24 +1,33 @@
 package com.example.university.controller;
 
-
 import com.example.university.model.Professor;
-import com.example.university.service.impl.ProfessorServiceImpl;
+import com.example.university.service.ProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
 @Controller
+@RequestMapping("/professor")
 public class ProfessorController {
-    @Autowired
-    private ProfessorServiceImpl professorService;
+    private final ProfessorService professorService;
 
-    @GetMapping("/professor")
-    public String professorsPage(Model model) {
-        List<Professor> professors = professorService.findAll();
-        model.addAttribute("professors", professors);
-        return "professor";
+    public ProfessorController(ProfessorService professorService) {
+        this.professorService = professorService;
+    }
+
+    @GetMapping
+    public String getAllProfessors(Model model) {
+        try {
+            List<Professor> professors = professorService.findAll();
+            model.addAttribute("professors", professors);
+            return "professor";
+        } catch (Exception e) {
+            model.addAttribute("error", "An error occurred while retrieving professors.");
+            return "error";
+        }
     }
 }

@@ -25,5 +25,11 @@ public class Course {
             joinColumns = @JoinColumn(name = "course_id"),
             inverseJoinColumns = @JoinColumn(name = "professor_id")
     )
+    @ToString.Exclude
     private Collection<Professor> professors;
+
+    public Course(Long id, String name) {
+        this.id = id;
+        this.courseName = name;
+    }
 }

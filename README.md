@@ -1,4 +1,4 @@
-![UML діаграма](diagram.png)
+![UML діаграма](f.png)
 
 ## Getting Started
 
@@ -10,8 +10,7 @@ To ensure the proper functioning of the project, follow these steps
     docker-compose up
     ```
 
-   This will automatically configure all necessary dependencies and launch your application.
-
+  
 2. Run the project
 
 3. After a successful Docker startup, open your web browser and go to:
