@@ -1,4 +1,4 @@
-![UML діаграма](f.png)
+![UML Diagram](diagram.png)
 
 ## Getting Started
 
@@ -13,12 +13,22 @@ To ensure the proper functioning of the project, follow these steps
   
 2. Run the project
 
-3. After a successful Docker startup, open your web browser and go to:
+### 3. Accessing the Application
 
-   [http://localhost:8080/](http://localhost:8080/)
+After successfully starting your application with Docker, open your web browser.
+Navigate to: http://localhost:8080/
+Here, you will find your application up and running.
 
-   Here, you will find your application up and running.
-
+### 4. Login Credentials <br>
+####   Admin Panel <br>
+Username: admin <br>
+Password: admin <br>
+####   Student Panel <br>
+Username: student <br>
+Password: student <br>
+####   Professor Panel <br>
+Username: professor <br>
+Password: professor <br>
 ## Other Important Steps
 
 **User Stories:**

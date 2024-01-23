@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Professor CABINET</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        li {
+            list-style-type: none;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        form {
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        input[type="text"], select {
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<main id="main">
+    <div class="container">
+        <h1 class="text-center">Professor Panel</h1>
+        <a href="/logout">
+            <button>Logout</button>
+        </a>
+    </div>
+
+
+    <div class="container">
+        <h2 class="text-center">Manage my profile</h2>
+        <p>My Name: <span th:text="${professor.username}"></span></p>
+
+        <ul class="list-unstyled">
+            <li>
+                <!-- Get Schedule Form -->
+                <form th:action="@{/professorscab/schedule}" method="get">
+                    <input type="hidden" name="userId" th:value="${professor.id}"/>
+                    <button type="submit">Get my schedule</button>
+                </form>
+            </li>
+            <li>
+                <!-- Change Username Form -->
+                <form th:action="@{/professorscab/changeusername}" method="post">
+                    <input type="hidden" name="userId" th:value="${professor.id}"/>
+                    <input type="text" name="newUsername" placeholder="New Name" required/>
+                    <button type="submit">Change Name</button>
+                </form>
+            </li>
+            <li>
+                <!-- Change Faculty Form -->
+                <form th:action="@{/studentscab/changefaculty}" method="post">
+                    <label for="newFacultyId">Choose a new faculty:</label>
+                    <select name="newFacultyId" id="newFacultyId">
+                        <option th:each="faculty : ${availableFaculties}"
+                                th:value="${faculty.id}"
+                                th:text="${faculty.facultyName}">Select a faculty
+                        </option>
+                    </select>
+                    <input type="hidden" name="userId" th:value="${userId}"/>
+                    <button type="submit">Change Faculty</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</main>
+</body>
+</html>

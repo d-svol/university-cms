@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Page</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css">
+    <style>
+        .container { margin: auto; }
+        .top-buffer { margin-top: 20px; }
+        .form-group { margin-top: 15px; }
+        .role-list li {
+            list-style-type: none;
+            padding-left: 2px;
+            margin: 0;
+        }
+        .form-inline { margin-top: 15px; }
+    </style>
+</head>
+<body>
+<main class="container">
+    <h1>Students Page</h1>
+
+    <section>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">User ID</th>
+                    <th scope="col">Group ID</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr th:each="student : ${students}">
+                <td th:text="${student.id}"></td>
+                <td th:text="${student.groupId}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <a th:href="@{/adminscab}" class="btn btn-secondary mt-4">Go to Admin Panel</a>
+</main>
+</body>
+</html>
