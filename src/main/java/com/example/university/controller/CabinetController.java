@@ -4,10 +4,12 @@ package com.example.university.controller;
 import com.example.university.model.StudentCabinetData;
 import com.example.university.model.university.Faculty;
 import com.example.university.model.university.Group;
+import com.example.university.model.user.Role;
 import com.example.university.model.user.UserEntity;
 import com.example.university.service.UserCabinetService;
 import com.example.university.service.university.FacultyService;
 import com.example.university.service.university.GroupService;
+import com.example.university.service.user.RoleService;
 import com.example.university.service.user.StudentService;
 import com.example.university.service.user.UserService;
 import lombok.RequiredArgsConstructor;
@@ -23,13 +25,15 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CabinetController {
     private final UserService userService;
-    private final StudentService studentService;
+    private final RoleService roleService;
     private final FacultyService facultyService;
     private final GroupService groupService;
     private final UserCabinetService userCabinetService;
 
     @GetMapping("/adminscab")
-    public String adminCabinetPage() {
+    public String adminCabinetPage(Model model) {
+        List<Role> roles = roleService.getAllRoles();
+        model.addAttribute("roles", roles);
         return "adminscab";
     }
 
@@ -49,11 +53,6 @@ public class CabinetController {
         List<Faculty> faculties = facultyService.getAllFaculties();
         StudentCabinetData cabinetData = userCabinetService.getStudentCabinetData(authentication.getName());
 
-//        model.addAttribute("userId", cabinetData.getUserID());
-//        model.addAttribute("username", cabinetData.getUsername());
-//        model.addAttribute("studentId", cabinetData.getStudentId());
-//        model.addAttribute("studentGroup", cabinetData.getStudentGroup());
-//        model.addAttribute("availableGroups", cabinetData.getAvailableGroups());
         model.addAttribute("groupId", cabinetData.getGroupId());
         model.addAttribute("groupName", cabinetData.getGroupName());
         model.addAttribute("availableGroups", groups);

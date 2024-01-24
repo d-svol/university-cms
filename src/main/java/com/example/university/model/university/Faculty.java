@@ -23,4 +23,9 @@ public class Faculty {
     @ManyToOne
     @JoinColumn(name = "university_id")
     private University university;
+
+    public Faculty(long id, String facultyName) {
+        this.id = id;
+        this.facultyName = facultyName;
+    }
 }

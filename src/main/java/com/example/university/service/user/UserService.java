@@ -24,7 +24,11 @@ public class UserService  {
         return userRepository.findAll();
     }
 
-    public Optional<UserEntity> getStudentByUsername(String username) {
+    public void saveUser(UserEntity user) {
+        userRepository.save(user);
+    }
+
+    public Optional<UserEntity> getByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 

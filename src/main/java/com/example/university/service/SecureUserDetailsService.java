@@ -22,7 +22,7 @@ public class SecureUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserEntity user = userService.getStudentByUsername(username)
+        UserEntity user = userService.getByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
 
         return new org.springframework.security.core.userdetails.User(

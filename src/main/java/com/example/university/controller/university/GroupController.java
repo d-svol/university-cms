@@ -20,5 +20,4 @@ public class GroupController {
         model.addAttribute("groups", groupService.getAllGroups());
         return "university/group";
     }
-
 }

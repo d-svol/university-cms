@@ -26,7 +26,7 @@ public class UserCabinetService {
             throw new IllegalArgumentException("Username can't be blank");
         }
 
-        Optional<UserEntity> user = userService.getStudentByUsername(username);
+        Optional<UserEntity> user = userService.getByUsername(username);
         if (user.isEmpty()) {
             throw new NoSuchElementException("No user found with username: " + username);
         }

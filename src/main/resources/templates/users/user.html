@@ -63,7 +63,7 @@
             <input type="password"  placeholder="Password" class="form-control mr-2" required />
             <select class="form-control mr-2" required>
                 <option value="">Select Role</option>
-                <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}"></option>
+                <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}">Select a Role</option>
             </select>
             <input type="number" placeholder="Faculty ID" class="form-control mr-2" required />
             <button type="submit" class="btn btn-success">Add User</button>
