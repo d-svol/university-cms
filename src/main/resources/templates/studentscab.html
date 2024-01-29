@@ -61,13 +61,16 @@
         }
     </style>
 </head>
+<a href="/logout">
+    <button>Logout</button>
+</a>
 <body>
 <main id="main">
     <div class="container">
         <h1 class="text-center">Student Panel</h1>
-        <a href="/logout">
-            <button>Logout</button>
-        </a>
+        <form action="/course" method="get">
+            <button type="submit">Display All Courses</button>
+        </form>
         <h2 class="text-center">My Student Group: <span th:text="${groupName}"></span></h2>
         <li>
             <!-- Change Group Form -->

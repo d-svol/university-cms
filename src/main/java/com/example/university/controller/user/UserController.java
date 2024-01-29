@@ -33,28 +33,28 @@ public class UserController {
         return "users/user";
     }
 
-    @GetMapping("/assignRole")
-    public String assignRolePage() {
-        return "assignRole";
-    }
-
-    @PostMapping("/assignRole")
-    public String assignRole(@RequestParam("username") String username, @RequestParam("role") String roleName) {
-        Optional<UserEntity> userOpt = userService.getByUsername(username);
-
-        if (userOpt.isPresent()) {
-            UserEntity user = userOpt.get();
-            Optional<Role> roleOpt = roleService.getRoleByName(roleName);
-
-            if (roleOpt.isPresent()) {
-                Role role = roleOpt.get();
-                user.setRole(role);
-                userService.saveUser(user);
-                return "redirect:/success";
-            }
-        }
-
-        return "redirect:/error";
-    }
+//    @GetMapping("/assignRole")
+//    public String assignRolePage() {
+//        return "assignRole";
+//    }
+//
+//    @PostMapping("/assignRole")
+//    public String assignRole(@RequestParam("username") String username, @RequestParam("role") String roleName) {
+//        Optional<UserEntity> userOpt = userService.getByUsername(username);
+//
+//        if (userOpt.isPresent()) {
+//            UserEntity user = userOpt.get();
+//            Optional<Role> roleOpt = roleService.getRoleByName(roleName);
+//
+//            if (roleOpt.isPresent()) {
+//                Role role = roleOpt.get();
+//                user.setRole(role);
+//                userService.saveUser(user);
+//                return "redirect:/success";
+//            }
+//        }
+//
+//        return "redirect:/error";
+//    }
 
 }

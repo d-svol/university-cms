@@ -15,7 +15,8 @@ public class Group {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long facultyId;
+    @Column(name = "course_id")
+    private Long courseId;
 
     @Column(name = "name")
     private String groupName;

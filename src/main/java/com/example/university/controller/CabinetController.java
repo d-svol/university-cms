@@ -60,4 +60,9 @@ public class CabinetController {
 
         return "studentscab";
     }
+
+    @GetMapping("/stuffscab")
+    public String stuffCabinetPage(Model model) {
+        return "stuffscab";
+    }
 }

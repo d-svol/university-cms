@@ -10,7 +10,7 @@ public class ErrorController {
     @GetMapping("/error")
     public String showErrorPage(Model model) {
         model.addAttribute("errorMessage", "An error occurred while processing your request.");
-        return "errorPage";
+        return "error";
     }
 }
 

@@ -56,23 +56,21 @@
             text-align: center;
         }
     </style>
-</head>
-<body>
-
-<div class="container">
-    <h1>Admin Panel</h1>
     <a href="/logout">
         <button>Logout</button>
     </a>
+</head>
+
+<body>
+<div class="container">
+    <h1>Admin Panel</h1>
+
     <div>
         <h2>Assign Role to User</h2>
         <form th:action="@{/assignRole}" method="post">
             <input type="text" id="username" name="username" placeholder="Username" required>
             <select id="role" name="role">
-                <option value="ADMIN">Admin</option>
-                <option value="STUDENT">Student</option>
-                <option value="TEACHER">Teacher</option>
-                <option value="STAFF">Staff</option>
+                <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}">Select a Role</option>
             </select>
             <button type="submit">Assign Role</button>
         </form>
@@ -96,8 +94,12 @@
         <button type="submit">Display All Faculties</button>
     </form>
     <hr>
+    <form action="/course" method="get">
+        <button type="submit">Display All Courses</button>
+    </form>
+    <hr>
     <form action="/group" method="get">
-        <button type="submit">Display All Group</button>
+        <button type="submit">Display All Groups</button>
     </form>
     <hr>
     <form action="/schedule" method="get">
@@ -105,7 +107,5 @@
     </form>
     <hr>
 </div>
-
-<a href="/logout">Logout</a>
 </body>
 </html>

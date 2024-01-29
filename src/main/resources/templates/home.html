@@ -26,19 +26,26 @@
             max-width: 400px;
         }
 
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
         .button-container a {
             text-decoration: none;
         }
 
-        button {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
+         button {
             background-color: #007bff;
             color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
             cursor: pointer;
-            transition: background-color 0.3s;
         }
 
         button:hover {
@@ -69,12 +76,17 @@
         <a href="/adminscab"><button>Go to Admin Page</button></a>
         <a href="/studentscab"><button>Go to Students Page</button></a>
         <a href="/professorscab"><button>Go to Professor Page</button></a>
-        <a href="/stuff"><button>Go to Stuff Page</button></a>
+        <a href="/stuffscab">
+            <button>Go to Stuff Page</button>
+        </a>
     </div>
 
     <footer id="footer">
         <a href="https://github.com/d-svol" target="_blank" style="color: #333; text-decoration: none;">Visit GitHub Profile</a>
     </footer>
+    <a href="/logout">
+        <button>Logout</button>
+    </a>
 </body>
 
 </html>

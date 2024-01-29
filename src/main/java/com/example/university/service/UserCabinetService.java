@@ -41,12 +41,8 @@ public class UserCabinetService {
             throw new NoSuchElementException("No group found with ID: " + studentByUserId.get().getGroupId());
         }
         StudentCabinetData cabinetData = new StudentCabinetData();
-//        cabinetData.setUserID(user.get().getId());
-//        cabinetData.setUsername(user.get().getUsername());
-//        cabinetData.setStudentId(student.getId());
         cabinetData.setGroupId(groupById.get().getId());
         cabinetData.setGroupName(groupById.get().getGroupName());
-//        cabinetData.setAvailableGroups(groups);
 
         return cabinetData;
     }
