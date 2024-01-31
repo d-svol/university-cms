@@ -1,0 +1,61 @@
+@startuml UniversitySchema
+
+class University {
+  + Long id
+  + String name
+}
+
+class Faculty {
+  + Long id
+  + String facultyName
+}
+
+class Course {
+  + Long id
+  + String name
+  + String description
+}
+
+class Group {
+  + Long id
+  + Long courseId
+  + String groupName
+}
+
+class Role {
+  + Long id
+  + String name
+}
+
+class UserEntity {
+  + Long id
+  + String username
+  + String password
+}
+
+class Student {
+  + Long id
+}
+
+class Professor {
+  + Long id
+}
+
+class Schedule {
+  + Long id
+  + LocalDateTime start_time
+  + LocalDateTime end_time
+  + LocalDate date
+}
+
+University "1" --  Faculty
+Faculty "1" -- "0..*" Course
+Course "1" -- "0..*" Group
+UserEntity "1" -- "1" Role
+Group "1" -- "0..*" Student
+Course "1" -- "0..*" Professor
+Group "1" -- "0..*" Schedule
+Professor "1" -- "0..*" Schedule
+
+
+@enduml
