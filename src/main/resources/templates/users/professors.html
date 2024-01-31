@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Professors Page</title>
@@ -25,20 +27,62 @@
         <table class="table table-bordered">
             <thead>
             <tr>
-                <th scope="col">User ID</th>
                 <th scope="col">Professor ID</th>
+                <th scope="col">Professor Name</th>
+                <th scope="col">Course</th>
+                <th>Edit</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="professor : ${professors}">
-                <td th:text="${professor.userId}"></td>
-                <td th:text="${professor.id}"></td>
+                <td th:text="${professor.professorId}"></td>
+                <td th:text="${professor.userName}"></td>
+                <td th:text="${professor.courseName}"></td>
+                <td sec:authorize="hasAnyAuthority('ADMIN', 'STUFF')">
+                    <button type="button" class="btn btn-primary btn-sm"
+                            th:data-target="${'#editProfessorModal' + professor.professorId}"
+                            data-toggle="modal">Edit
+                    </button>
+                </td>
             </tr>
             </tbody>
         </table>
     </section>
 
-    <a th:href="@{/adminscab}" class="btn btn-secondary mt-4">Go to Admin Panel</a>
+    <!-- Edit Professor Modal -->
+    <div th:each="professor : ${professors}">
+        <div th:id="${'editProfessorModal' + professor.professorId}" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Assign Course to Professor</h5>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form th:action="@{/professors/edit}" method="post">
+                            <input type="hidden" name="professorId" th:value="${professor.professorId}"/>
+                            <div class="form-group">
+                                <label for="editCourseId">Course</label>
+                                <select id="editCourseId" name="courseId" class="form-control" required>
+                                    <option th:each="course : ${courses}" th:value="${course.id}"
+                                            th:text="${course.name}">Select Faculty
+                                    </option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-success">Save Changes</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a sec:authorize="hasAuthority('ADMIN')"
+       th:href="@{/adminscab}" class="btn btn-secondary mt-4">Go to Admin Panel</a>
 </main>
 </body>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
 </html>

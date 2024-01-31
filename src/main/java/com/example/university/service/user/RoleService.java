@@ -13,7 +13,7 @@ import java.util.Optional;
 public class RoleService {
     private final RoleRepository roleRepository;
 
-    public List<Role> getAllRoles(){
+    public List<Role> getAllRoles() {
         return roleRepository.findAll();
     }
 

@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "student")
 public class Student {
     @Id
-    private Long userId;
+    private Long id;
 
     private Long groupId;
 }

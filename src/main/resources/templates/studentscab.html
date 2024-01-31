@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -115,7 +114,8 @@
                     <select name="newFacultyId" id="newFacultyId">
                         <option th:each="faculty : ${availableFaculties}"
                                 th:value="${faculty.id}"
-                                th:text="${faculty.facultyName}">Select a faculty</option>
+                                th:text="${faculty.facultyName}">Select a faculty
+                        </option>
                     </select>
                     <input type="hidden" name="userId" th:value="${userId}"/>
                     <button type="submit">Change Faculty</button>

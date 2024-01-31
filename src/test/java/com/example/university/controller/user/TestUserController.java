@@ -1,6 +1,5 @@
 package com.example.university.controller.user;
 
-import com.example.university.model.university.Faculty;
 import com.example.university.model.user.Role;
 import com.example.university.model.user.UserEntity;
 import com.example.university.service.user.RoleService;
@@ -35,8 +34,7 @@ public class TestUserController {
     public void userPage_ShouldReturnUsersAndRoles() throws Exception {
         List<UserEntity> users = Collections.singletonList(
                 new UserEntity(1L, "Name", "1234",
-                        new Role(1L, "ADMIN"),
-                        new Faculty(1, "Faculty")));
+                        new Role(1L, "ADMIN")));
         List<Role> roles = Collections.singletonList(new Role());
 
         Mockito.when(userService.getAllUsers()).thenReturn(users);

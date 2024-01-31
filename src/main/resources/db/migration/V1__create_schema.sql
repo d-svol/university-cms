@@ -39,16 +39,18 @@ CREATE TABLE user_entity (
 );
 
 CREATE TABLE student (
-	user_id SERIAL PRIMARY KEY,
+	id SERIAL PRIMARY KEY,
 	group_id INTEGER,
-	FOREIGN KEY (user_id) REFERENCES user_entity(id),
+	FOREIGN KEY (id) REFERENCES user_entity(id),
 	FOREIGN KEY (group_id) REFERENCES groups(id) ON DELETE CASCADE
 );
 
 CREATE TABLE professor (
-    id SERIAL PRIMARY KEY,
-    user_id      INTEGER,
-    FOREIGN KEY (user_id) REFERENCES user_entity(id)
+    id      SERIAL PRIMARY KEY,
+    user_id INTEGER,
+    course_id INTEGER,
+    FOREIGN KEY (user_id) REFERENCES user_entity(id) ON DELETE CASCADE,
+    FOREIGN KEY (course_id) REFERENCES courses(id)
 );
 
 CREATE TABLE schedule (

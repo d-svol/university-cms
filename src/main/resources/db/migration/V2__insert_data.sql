@@ -28,16 +28,14 @@ INSERT INTO user_entity (username, password, role_id) VALUES
 ('TeacherUsername', '$2a$10$kGYYgeP1xwODAboj2ehPmOiaZoRB/7nfV42exEci0Bu/O5YgA7wKm', 3),
 ('stuff', '$2a$10$XFaYvwQh7UApKlRsFZM.IuQcXma6zD5P1lLt0914aDDym1US2GPC2', 4); -- password stuff
 
-
-INSERT INTO student(user_id, group_id) VALUES
+INSERT INTO student(id, group_id) VALUES
 (2, 1), -- 'student' 'AA-01'
 (5, 1); -- 'StudentUsername' 'AA-01'
 
-INSERT INTO professor (user_id)
-SELECT id
+INSERT INTO professor (user_id, course_id)
+SELECT id, 1
 FROM user_entity
-WHERE role_id = 3;	-- 'TeacherUsername' and 'professor'
-
+WHERE role_id = 3;	-- 'TeacherUsername' and 'professor' / course_id ==> 'Mathematics'
 
 INSERT INTO schedule (course_id, group_id, professor_id, start_time, end_time, date) VALUES
 (1, 1, 1, '2023-07-07 09:00:00', '2023-07-07 11:00:00', '2023-07-07'), -- course-'Mathematics' / group-'AA-01'/ professor-'professor'

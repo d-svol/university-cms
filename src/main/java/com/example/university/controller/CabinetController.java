@@ -10,7 +10,6 @@ import com.example.university.service.UserCabinetService;
 import com.example.university.service.university.FacultyService;
 import com.example.university.service.university.GroupService;
 import com.example.university.service.user.RoleService;
-import com.example.university.service.user.StudentService;
 import com.example.university.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;

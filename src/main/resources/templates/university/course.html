@@ -10,6 +10,15 @@
         .container { margin: auto; }
         .top-buffer { margin-top: 20px; }
         .form-group { margin-top: 15px; }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -43,14 +52,13 @@
             <td th:text="${course.name}"></td>
             <td th:text="${course.description}"></td>
             <td th:text="${course.faculty.facultyName}"></td>
-            <td sec:authorize="hasRole('ADMIN')">
+            <td sec:authorize="hasAuthority('ADMIN')">
                 <form th:action="@{/course/delete}" method="post" class="d-inline">
                     <input type="hidden" name="courseId" th:value="${course.id}"/>
-                    <button sec:authorize="hasRole('ADMIN')" type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                 </form>
             </td>
             <td sec:authorize="hasAnyAuthority('ADMIN', 'STUFF')">
-                <!-- Update data-target to correctly reference the modal -->
                 <button type="button" class="btn btn-primary btn-sm"
                         th:data-target="${'#editCourseModal' + course.id}"
                         data-toggle="modal">
@@ -59,6 +67,7 @@
             </td>
         </tr>
         </tbody>
+
         <!-- Edit Course Modals -->
         <div th:each="course : ${courses}">
             <div th:id="${'editCourseModal' + course.id}" class="modal fade" tabindex="-1" role="dialog">

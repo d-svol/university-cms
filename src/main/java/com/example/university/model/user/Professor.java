@@ -19,4 +19,7 @@ public class Professor {
 
     @Column(name = "user_id")
     private Long userId;
+
+    @Column(name = "course_id")
+    private Long courseId;
 }
