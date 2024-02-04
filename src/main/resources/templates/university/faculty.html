@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Faculties Page</title>
@@ -9,6 +10,7 @@
         .top-buffer { margin-top: 20px; }
         .form-inline { margin-top: 15px; }
     </style>
+    <div th:replace="fragments/login-dashboard.html"></div>
 </head>
 
 <body>
@@ -20,21 +22,21 @@
         <tr>
             <th>Faculty ID</th>
             <th>Name</th>
-            <th>Delete</th>
-            <th>Edit</th>
+            <th sec:authorize="hasAuthority('ADMIN')">Delete</th>
+            <th sec:authorize="hasAnyAuthority('ADMIN', 'STUFF')">Edit</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="faculty : ${faculties}">
             <td th:text="${faculty.id}"></td>
             <td th:text="${faculty.facultyName}"></td>
-            <td>
+            <td sec:authorize="hasAuthority('ADMIN')">
                 <form th:action="@{/faculty/delete}" method="post" class="d-inline">
                     <input type="hidden" name="facultyId" th:value="${faculty.id}"/>
                     <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                 </form>
             </td>
-            <td>
+            <td sec:authorize="hasAnyAuthority('ADMIN', 'STUFF')">
                 <button type="button" class="btn btn-primary btn-sm edit-btn" th:data-faculty-id="${faculty.id}"
                         data-toggle="modal" data-target="#editFacultyModal">Edit
                 </button>

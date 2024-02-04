@@ -1,0 +1,11 @@
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+<div sec:authorize="isAuthenticated()">
+    <form th:action="@{/logout}" method="post">
+        <button type="submit" class="btn btn-primary">Logout</button>
+    </form>
+</div>
+
+<div sec:authorize="!isAuthenticated()">
+    <a href="/login" class="btn btn-primary">Login</a>
+</div>

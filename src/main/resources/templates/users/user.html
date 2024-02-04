@@ -16,6 +16,7 @@
         }
         .form-inline { margin-top: 15px; }
     </style>
+    <div th:replace="fragments/login-dashboard.html"></div>
 </head>
 <body>
 <main class="container">
@@ -55,20 +56,6 @@
             </tbody>
         </table>
     </section>
-
-    <!--     <section> -->
-    <!--         <h2>Add New User</h2> -->
-    <!--         <form th:action="@{/user/add}" method="post" class="form-inline"> -->
-    <!--             <input type="text" placeholder="Username" class="form-control mr-2" required /> -->
-    <!--             <input type="password"  placeholder="Password" class="form-control mr-2" required /> -->
-    <!--             <select class="form-control mr-2" required> -->
-    <!--                 <option value="">Select Role</option> -->
-    <!--                 <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}">Select a Role</option> -->
-    <!--             </select> -->
-    <!--             <input type="number" placeholder="Faculty ID" class="form-control mr-2" required /> -->
-    <!--             <button type="submit" class="btn btn-success">Add User</button> -->
-    <!--         </form> -->
-    <!--     </section> -->
 
     <a class="btn btn-secondary mt-4" th:href="@{/adminscab}">Go to Admin Panel</a>
 </main>

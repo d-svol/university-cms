@@ -1,6 +1,7 @@
 package com.example.university.service.university;
 
 import com.example.university.customexception.CourseNotFoundException;
+import com.example.university.customexception.GroupNotFoundException;
 import com.example.university.dto.GroupDTO;
 import com.example.university.model.university.Course;
 import com.example.university.model.university.Group;
@@ -29,31 +30,29 @@ public class GroupService {
     }
 
     public List<GroupDTO> getAllGroupsDTOs() {
-        List<Group> groups = getAllGroups();
-        List<GroupDTO> groupDTOs = new ArrayList<>();
+        return groupRepository.findAllGroupDTOs();
+    }
 
-        for (Group group : groups) {
-            try {
-                Course course = courseRepository.findById(group.getCourseId())
-                        .orElseThrow(() -> new CourseNotFoundException("Course not found"));
-
-                GroupDTO dto = new GroupDTO();
-                dto.setId(group.getId());
-                dto.setGroupName(group.getGroupName());
-                dto.setCourseName(course.getName());
-                groupDTOs.add(dto);
-            } catch (NoSuchElementException e) {
-                e.printStackTrace();
-            }
-        }
-        return groupDTOs;
+    public void addGroup(String groupName, Long courseId) {
+        Course course = courseRepository.findById(courseId)
+                .orElseThrow(() -> new GroupNotFoundException("Course not found for ID: " + courseId));
+        Group group = new Group();
+        group.setGroupName(groupName);
+        group.setCourseId(course.getId());
+        groupRepository.save(group);
     }
 
     public void updateGroup(Long groupId, String groupName, Long courseId) {
         Group group = groupRepository.findById(groupId)
-                .orElseThrow(() -> new NoSuchElementException("Group not found"));
+                .orElseThrow(() -> new GroupNotFoundException("Group not found by Id: " + groupId));
         group.setGroupName(groupName);
         group.setCourseId(courseId);
         groupRepository.save(group);
+    }
+
+    public void deleteGroup(Long groupId) {
+        Group group = groupRepository.findById(groupId)
+                .orElseThrow(() -> new GroupNotFoundException("Group not found by Id: " + groupId));
+        groupRepository.delete(group);
     }
 }

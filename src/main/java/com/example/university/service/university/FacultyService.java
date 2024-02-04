@@ -22,12 +22,4 @@ public class FacultyService {
     public Optional<Faculty> getFacultyById(Long id) {
         return facultyRepository.findById(id);
     }
-//
-//    public Faculty saveFaculty(Faculty faculty) {
-//        return facultyRepository.save(faculty);
-//    }
-//
-//    public void deleteFaculty(Long id) {
-//        facultyRepository.deleteById(id);
-//    }
 }

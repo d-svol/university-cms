@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Schedule Page</title>
@@ -16,6 +17,7 @@
         }
         .form-inline { margin-top: 15px; }
     </style>
+    <div th:replace="fragments/login-dashboard.html"></div>
 </head>
 <body>
 <main class="container">
@@ -56,7 +58,7 @@
         </tbody>
     </table>
 
-    <a th:href="@{/adminscab}" class="btn btn-primary mt-4">Go to Admin Panel</a>
+    <a th:href="@{/adminscab}" sec:authorize="hasAuthority('ADMIN')" class="btn btn-primary mt-4">Go to Admin Panel</a>
 </main>
 </body>
 </html>

@@ -1,5 +1,6 @@
 package com.example.university.config;
 
+import com.example.university.security.CustomSuccessHandler;
 import com.example.university.service.user.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +13,7 @@ import org.springframework.security.config.annotation.web.configurers.CsrfConfig
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -34,7 +36,11 @@ public class SecurityConfig {
                         .requestMatchers("/professorscab").hasAuthority("TEACHER")
                         .requestMatchers("/stuffscab").hasAuthority("STUFF")
                         .anyRequest().authenticated())
-                .formLogin(Customizer.withDefaults())
+                .formLogin((form) -> form
+                        .successHandler(myAuthenticationSuccessHandler())
+                        .loginPage("/login")
+                        .permitAll()
+                )
                 .logout((logout) -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/")
@@ -50,6 +56,10 @@ public class SecurityConfig {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
+    @Bean
+    public AuthenticationSuccessHandler myAuthenticationSuccessHandler() {
+        return new CustomSuccessHandler();
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {

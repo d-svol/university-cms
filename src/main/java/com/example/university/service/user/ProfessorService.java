@@ -23,9 +23,10 @@ public class ProfessorService {
     private final UserRepository userRepository;
     private final CourseRepository courseRepository;
 
-    public List<Professor> getAllProfessors() {
-        return professorRepository.findAll();
+    public List<ProfessorDTO> getAllProfessors() {
+        return professorRepository.findAllProfessors();
     }
+
 
     public List<ProfessorDTO> getAllProfessorDTOs() {
         List<Professor> professors = professorRepository.findAll();

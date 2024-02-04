@@ -19,13 +19,12 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/professors")
 public class ProfessorController {
-
     private final ProfessorService professorService;
     private final CourseService courseService;
 
     @GetMapping
     public String professorPage(Model model) {
-        List<ProfessorDTO> professorDTOs = professorService.getAllProfessorDTOs();
+        List<ProfessorDTO> professorDTOs = professorService.getAllProfessors();
         model.addAttribute("professors", professorDTOs);
         model.addAttribute("courses", courseService.getAllCourses());
         return "/users/professors";

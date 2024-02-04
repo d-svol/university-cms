@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>University Page</title>
@@ -17,34 +18,32 @@
             cursor: pointer;
         }
     </style>
+    <div th:replace="fragments/login-dashboard.html"></div>
 </head>
 
 <body>
 <div class="container top-buffer">
     <h1 class="text-center">University Page</h1>
-    <a href="/logout">
-        <button>Logout</button>
-    </a>
     <table class="table table-hover mt-4">
         <thead class="thead-dark">
         <tr>
             <th>University ID</th>
             <th>Name</th>
-            <th>Delete</th>
-            <th>Edit</th>
+            <th sec:authorize="hasAuthority('ADMIN')">Delete</th>
+            <th sec:authorize="hasAuthority('ADMIN')">Edit</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="university: ${university}">
             <td th:text="${university.id}"></td>
             <td th:text="${university.universityName}"></td>
-            <td>
+            <td sec:authorize="hasAuthority('ADMIN')">
                 <form th:action="@{/university/delete}" method="post" class="d-inline">
                     <input type="hidden" name="universityId"/>
                     <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                 </form>
             </td>
-            <td>
+            <td sec:authorize="hasAuthority('ADMIN')">
                 <button type="button" class="btn btn-primary btn-sm edit-btn"
                         data-toggle="modal" data-target="#editUniversityModal">Edit
                 </button>
@@ -52,7 +51,7 @@
         </tr>
         </tbody>
     </table>
-    <a th:href="@{/adminscab}" class="btn btn-secondary mt-4">Go to Admin Panel</a>
+    <a th:href="@{/adminscab}" sec:authorize="hasAuthority('ADMIN')" class="btn btn-secondary mt-4">Go to Admin Panel</a>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

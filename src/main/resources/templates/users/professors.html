@@ -18,6 +18,7 @@
         }
         .form-inline { margin-top: 15px; }
     </style>
+    <div th:replace="fragments/login-dashboard.html"></div>
 </head>
 <body>
 <main class="container">
@@ -30,6 +31,7 @@
                 <th scope="col">Professor ID</th>
                 <th scope="col">Professor Name</th>
                 <th scope="col">Course</th>
+                <th scope="col">Delete</th>
                 <th>Edit</th>
             </tr>
             </thead>
@@ -38,6 +40,11 @@
                 <td th:text="${professor.professorId}"></td>
                 <td th:text="${professor.userName}"></td>
                 <td th:text="${professor.courseName}"></td>
+                <td sec:authorize="hasAuthority('ADMIN')">
+                    <form th:action="@{/professors/delete(${professor.professorId})}" method="post">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
                 <td sec:authorize="hasAnyAuthority('ADMIN', 'STUFF')">
                     <button type="button" class="btn btn-primary btn-sm"
                             th:data-target="${'#editProfessorModal' + professor.professorId}"

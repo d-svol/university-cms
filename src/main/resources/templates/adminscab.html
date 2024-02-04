@@ -56,9 +56,7 @@
             text-align: center;
         }
     </style>
-    <a href="/logout">
-        <button>Logout</button>
-    </a>
+    <div th:replace="fragments/login-dashboard.html"></div>
 </head>
 
 <body>
@@ -76,17 +74,16 @@
         </form>
     </div>
 </div>
+
 <div class="container">
-    <div>
-        <h2 class="text-center">Manage Users</h2>
-        <button type="button" id="openUserModal" class="btn btn-primary">Add new user</button>
-        <form action="/user" method="get">
-            <button type="submit" class="btn btn-primary">Display All Users</button>
-        </form>
-        <form action="/professors" method="get">
-            <button type="submit">Display All Professors</button>
-        </form>
-    </div>
+    <h2 class="text-center">Manage Users</h2>
+    <button type="button" id="openUserModal" class="btn btn-primary">Add new user</button>
+    <form action="/user" method="get">
+        <button type="submit" class="btn btn-primary">Display All Users</button>
+    </form>
+    <form action="/professors" method="get">
+        <button type="submit">Display All Professors</button>
+    </form>
 </div>
 <div class="container">
     <form action="/university" method="get">

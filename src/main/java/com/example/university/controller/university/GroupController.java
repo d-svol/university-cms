@@ -28,17 +28,27 @@ public class GroupController {
         return "university/group";
     }
 
+    @PostMapping("add")
+    public String addGroup(@RequestParam String groupName, @RequestParam Long courseId, RedirectAttributes redirectAttributes) {
+        groupService.addGroup(groupName, courseId);
+        redirectAttributes.addFlashAttribute("successMessage", "Group added successfully!");
+        return "redirect:/group";
+    }
+
     @PostMapping("/edit")
     public String editGroup(@RequestParam Long groupId,
                             @RequestParam String groupName,
                             @RequestParam Long courseId,
                             RedirectAttributes redirectAttributes) {
-        try {
-            groupService.updateGroup(groupId, groupName, courseId);
-            redirectAttributes.addFlashAttribute("successMessage", "Group updated successfully.");
-        } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Error updating group.");
-        }
+        groupService.updateGroup(groupId, groupName, courseId);
+        redirectAttributes.addFlashAttribute("successMessage", "Group updated successfully.");
+        return "redirect:/group";
+    }
+
+    @PostMapping("/delete")
+    public String deleteGroup(@RequestParam("groupId") Long groupId, RedirectAttributes redirectAttributes) {
+        groupService.deleteGroup(groupId);
+        redirectAttributes.addFlashAttribute("successMessage", "Group successfully deleted.");
         return "redirect:/group";
     }
 }

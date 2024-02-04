@@ -3,7 +3,6 @@ package com.example.university.model.university;
 import jakarta.persistence.*;
 import lombok.*;
 
-
 @Getter
 @Setter
 @NoArgsConstructor
