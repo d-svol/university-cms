@@ -1,22 +1,14 @@
 package com.example.university.controller.university;
 
 import com.example.university.dto.CourseDTO;
-import com.example.university.model.university.Course;
-import com.example.university.model.university.Faculty;
-import com.example.university.model.user.Role;
 import com.example.university.service.university.CourseService;
 import com.example.university.service.university.FacultyService;
-import com.example.university.service.user.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/course")
@@ -34,7 +26,7 @@ public class CourseController {
     public String coursesPage(Authentication authentication, Model model) {
         model.addAttribute("courseDTO", new CourseDTO());
         model.addAttribute("faculties", facultyService.getAllFaculties());
-        model.addAttribute("courses", courseService.getAllCourses());
+        model.addAttribute("courses", courseService.getAllCoursesDTO());
         return "university/course";
     }
 

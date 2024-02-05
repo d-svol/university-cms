@@ -1,6 +1,5 @@
 package com.example.university.service.university;
 
-import com.example.university.customexception.CourseNotFoundException;
 import com.example.university.customexception.GroupNotFoundException;
 import com.example.university.dto.GroupDTO;
 import com.example.university.model.university.Course;
@@ -10,9 +9,7 @@ import com.example.university.repository.GroupRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service

@@ -22,7 +22,4 @@ public class University {
 
     @Column(name = "name")
     private String universityName;
-
-    @OneToMany(mappedBy = "university")
-    private Set<Faculty> faculties;
 }

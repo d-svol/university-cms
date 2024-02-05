@@ -19,7 +19,6 @@ public class Course {
     private String name;
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "faculty_id", nullable = false)
-    private Faculty faculty;
+    @Column(name = "faculty_id", nullable = false)
+    private Long facultyId;
 }

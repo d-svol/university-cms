@@ -1,7 +1,5 @@
 package com.example.university.customexception;
 
-import com.example.university.customexception.GroupNotFoundException;
-import com.example.university.customexception.UniversityNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

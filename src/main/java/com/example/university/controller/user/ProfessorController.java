@@ -26,7 +26,7 @@ public class ProfessorController {
     public String professorPage(Model model) {
         List<ProfessorDTO> professorDTOs = professorService.getAllProfessors();
         model.addAttribute("professors", professorDTOs);
-        model.addAttribute("courses", courseService.getAllCourses());
+        model.addAttribute("courses", courseService.getAllCoursesDTO());
         return "/users/professors";
     }
 

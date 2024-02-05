@@ -20,9 +20,8 @@ public class Faculty {
     @Column(name = "name")
     private String facultyName;
 
-    @ManyToOne
-    @JoinColumn(name = "university_id")
-    private University university;
+    @Column(name = "university_id")
+    private Long universityId;
 
     public Faculty(long id, String facultyName) {
         this.id = id;

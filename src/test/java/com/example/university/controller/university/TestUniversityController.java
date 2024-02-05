@@ -33,8 +33,8 @@ public class TestUniversityController {
     @Test
     public void listUniversities_ShouldReturnUniversities() throws Exception {
         List<University> universities = List.of(
-                new University(1L, "University 1", Collections.singleton(new Faculty(1, "faculty_1"))),
-                new University(2L, "University 2", Collections.singleton(new Faculty(2, "faculty_2")))
+                new University(1L, "University 1"),
+                new University(2L, "University 2")
         );
 
         given(universityService.getAllUniversities()).willReturn(universities);

@@ -24,7 +24,7 @@ public class GroupController {
     @GetMapping
     public String listGroups(Model model) {
         model.addAttribute("groups", groupService.getAllGroupsDTOs());
-        model.addAttribute("courses", courseService.getAllCourses());
+        model.addAttribute("courses", courseService.getAllCoursesDTO());
         return "university/group";
     }
 

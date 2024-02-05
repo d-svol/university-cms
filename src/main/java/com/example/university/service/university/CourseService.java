@@ -24,7 +24,7 @@ public class CourseService {
         this.facultyRepository = facultyRepository;
     }
 
-    public List<CourseDTO> getAllCourses() {
+    public List<CourseDTO> getAllCoursesDTO() {
         return courseRepository.findAllCourseDTOs();
     }
 
@@ -34,7 +34,7 @@ public class CourseService {
         Course course = new Course();
         course.setName(courseDTO.getName());
         course.setDescription(courseDTO.getDescription());
-        course.setFaculty(faculty);
+        course.setFacultyId(faculty.getId());
         courseRepository.save(course);
     }
 
@@ -49,7 +49,7 @@ public class CourseService {
         course.setDescription(courseDTO.getDescription());
         Faculty faculty = facultyRepository.findById(courseDTO.getFacultyId())
                 .orElseThrow(() -> new FacultyNotFoundException("Invalid faculty ID: " + courseDTO.getFacultyId()));
-        course.setFaculty(faculty);
+        course.setFacultyId(faculty.getId());
         courseRepository.save(course);
     }
 }
