@@ -1,7 +1,6 @@
 package com.example.university.controller.user;
 
 import com.example.university.dto.StudentDTO;
-import com.example.university.dto.UserDTO;
 import com.example.university.service.university.GroupService;
 import com.example.university.service.user.StudentService;
 import lombok.RequiredArgsConstructor;

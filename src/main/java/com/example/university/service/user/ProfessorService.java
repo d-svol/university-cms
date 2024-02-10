@@ -9,15 +9,17 @@ import com.example.university.repository.CourseRepository;
 import com.example.university.repository.ProfessorRepository;
 import com.example.university.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @RequiredArgsConstructor
 @Service
 public class ProfessorService {
+    private static final Logger log = LoggerFactory.getLogger(ProfessorService.class);
     private final ProfessorRepository professorRepository;
     private final UserRepository userRepository;
     private final CourseRepository courseRepository;
@@ -44,8 +46,8 @@ public class ProfessorService {
                 dto.setCourseName(course.getName());
 
                 professorDTOs.add(dto);
-            } catch (NoSuchElementException e) {
-                e.printStackTrace();
+            } catch (EntityNotFoundException e) {
+                log.error("Error while fetching data: {}", e.getMessage());
             }
         }
 
