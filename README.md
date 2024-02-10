@@ -29,6 +29,11 @@ Password: student <br>
 ####   Professor Panel <br>
 Username: professor <br>
 Password: professor <br>
+####   Professor Panel <br>
+Username: stuff <br>
+Password: stuff <br>
+
+
 ## Other Important Steps
 
 **User Stories:**
