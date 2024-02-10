@@ -1,7 +1,6 @@
 package com.example.university.service.user;
 
-import com.example.university.customexception.CourseNotFoundException;
-import com.example.university.customexception.UserNotFoundException;
+import com.example.university.customexception.EntityNotFoundException;
 import com.example.university.dto.ProfessorDTO;
 import com.example.university.model.university.Course;
 import com.example.university.model.user.Professor;
@@ -35,9 +34,9 @@ public class ProfessorService {
         for (Professor professor : professors) {
             try {
                 UserEntity user = userRepository.findById(professor.getUserId())
-                        .orElseThrow(() -> new UserNotFoundException("User not found"));
+                        .orElseThrow(() -> new EntityNotFoundException("User not found"));
                 Course course = courseRepository.findById(professor.getCourseId())
-                        .orElseThrow(() -> new CourseNotFoundException("Course not found"));
+                        .orElseThrow(() -> new EntityNotFoundException("Course not found"));
 
                 ProfessorDTO dto = new ProfessorDTO();
                 dto.setProfessorId(professor.getId());

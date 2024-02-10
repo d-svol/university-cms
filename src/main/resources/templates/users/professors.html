@@ -31,8 +31,8 @@
                 <th scope="col">Professor ID</th>
                 <th scope="col">Professor Name</th>
                 <th scope="col">Course</th>
-                <th scope="col">Delete</th>
-                <th>Edit</th>
+                <th sec:authorize="hasAnyAuthority('ADMIN', 'STUFF')">Delete</th>
+                <th sec:authorize="hasAnyAuthority('ADMIN', 'STUFF')">Edit</th>
             </tr>
             </thead>
             <tbody>

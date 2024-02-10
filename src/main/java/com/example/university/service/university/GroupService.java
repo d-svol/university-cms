@@ -1,6 +1,6 @@
 package com.example.university.service.university;
 
-import com.example.university.customexception.GroupNotFoundException;
+import com.example.university.customexception.EntityNotFoundException;
 import com.example.university.dto.GroupDTO;
 import com.example.university.model.university.Course;
 import com.example.university.model.university.Group;
@@ -32,7 +32,7 @@ public class GroupService {
 
     public void addGroup(String groupName, Long courseId) {
         Course course = courseRepository.findById(courseId)
-                .orElseThrow(() -> new GroupNotFoundException("Course not found for ID: " + courseId));
+                .orElseThrow(() -> new EntityNotFoundException("Course not found for ID: " + courseId));
         Group group = new Group();
         group.setGroupName(groupName);
         group.setCourseId(course.getId());
@@ -41,7 +41,7 @@ public class GroupService {
 
     public void updateGroup(Long groupId, String groupName, Long courseId) {
         Group group = groupRepository.findById(groupId)
-                .orElseThrow(() -> new GroupNotFoundException("Group not found by Id: " + groupId));
+                .orElseThrow(() -> new EntityNotFoundException("Group not found by Id: " + groupId));
         group.setGroupName(groupName);
         group.setCourseId(courseId);
         groupRepository.save(group);
@@ -49,7 +49,7 @@ public class GroupService {
 
     public void deleteGroup(Long groupId) {
         Group group = groupRepository.findById(groupId)
-                .orElseThrow(() -> new GroupNotFoundException("Group not found by Id: " + groupId));
+                .orElseThrow(() -> new EntityNotFoundException("Group not found by Id: " + groupId));
         groupRepository.delete(group);
     }
 }

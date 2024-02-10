@@ -4,7 +4,7 @@
       lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>User Page</title>
+    <title>Students Page</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css">
     <style>
@@ -28,21 +28,63 @@
         <table class="table table-bordered">
             <thead>
             <tr>
-                <th scope="col">User ID</th>
-                <th scope="col">Group ID</th>
+                <th scope="col">Student Name</th>
+                <th scope="col">Group Name</th>
+                <th sec:authorize="hasAnyAuthority('ADMIN', 'STUFF')">Edit</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="student : ${students}">
-                <td th:text="${student.id}"></td>
-                <td th:text="${student.groupId}"></td>
+                <td th:text="${student.studentName}"></td>
+                <td th:text="${student.groupName}"></td>
+                <td sec:authorize="hasAnyAuthority('ADMIN', 'STUFF')">
+                    <button type="button" class="btn btn-primary btn-sm"
+                            th:data-target="${'#editStudentModal' + student.studentId}"
+                            data-toggle="modal">Edit
+                    </button>
+                </td>
             </tr>
             </tbody>
         </table>
     </section>
 
+    <!-- Edit Student Modal -->
+    <div th:each="student : ${students}">
+        <div th:id="${'editStudentModal' + student.studentId}" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit Student</h5>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form th:action="@{/student/edit}" th:object="${studentDTO}" method="post">
+                            <input type="hidden" name="studentId" th:value="${student.studentId}"/>
+                            <input type="hidden" name="studentName" th:value="${student.studentName}"/>
+                            <div class="form-group">
+                                <label for="groupName">Group Name</label>
+                                <select class="form-control" id="groupName" name="groupName">
+                                    <option th:each="group : ${groups}" th:value="${group.groupName}"
+                                            th:selected="${group.groupName == student.groupName}"
+                                            th:text="${group.groupName}">
+                                        Select Group
+                                    </option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-success">Save Changes</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <a sec:authorize="hasAuthority('ADMIN')"
        th:href="@{/adminscab}" class="btn btn-secondary mt-4">Go to Admin Panel</a>
 </main>
 </body>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
 </html>

@@ -1,5 +1,6 @@
 package com.example.university.service;
 
+import com.example.university.customexception.EntityNotFoundException;
 import com.example.university.model.StudentCabinetData;
 import com.example.university.model.university.Group;
 import com.example.university.model.user.Student;
@@ -23,22 +24,22 @@ public class UserCabinetService {
 
     public StudentCabinetData getStudentCabinetData(String username) {
         if (StringUtils.isBlank(username)) {
-            throw new IllegalArgumentException("Username can't be blank");
+            throw new EntityNotFoundException("Username can't be blank");
         }
 
         Optional<UserEntity> user = userService.getByUsername(username);
         if (user.isEmpty()) {
-            throw new NoSuchElementException("No user found with username: " + username);
+            throw new EntityNotFoundException("No user found with username: " + username);
         }
 
         Optional<Student> studentByUserId = studentService.getStudentByUserId(user.get().getId());
         if (studentByUserId.isEmpty()) {
-            throw new NoSuchElementException("No student found for user ID: " + user.get().getId());
+            throw new EntityNotFoundException("No student found for user ID: " + user.get().getId());
         }
 
         Optional<Group> groupById = groupService.getGroupById(studentByUserId.get().getGroupId());
         if (groupById.isEmpty()) {
-            throw new NoSuchElementException("No group found with ID: " + studentByUserId.get().getGroupId());
+            throw new EntityNotFoundException("No group found with ID: " + studentByUserId.get().getGroupId());
         }
         StudentCabinetData cabinetData = new StudentCabinetData();
         cabinetData.setGroupId(groupById.get().getId());

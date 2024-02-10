@@ -14,7 +14,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
-
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/professors")
@@ -34,12 +33,9 @@ public class ProfessorController {
     public String editProfessor(@RequestParam Long professorId,
                                 @RequestParam(required = false) Long courseId,
                                 RedirectAttributes redirectAttributes) {
-        try {
-            professorService.editProfessor(professorId, courseId);
-            redirectAttributes.addFlashAttribute("successMessage", "Professor updated successfully");
-        } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Error updating professor: " + e.getMessage());
-        }
+        professorService.editProfessor(professorId, courseId);
+        redirectAttributes.addFlashAttribute("successMessage", "Professor updated successfully");
+
         return "redirect:/professors";
     }
 }
