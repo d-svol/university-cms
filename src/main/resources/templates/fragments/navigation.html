@@ -1,0 +1,30 @@
+<div class="container">
+    <h2 class="text-center">Manage Users</h2>
+    <form action="/user" method="get" sec:authorize="hasAnyAuthority('ADMIN', 'STUFF')">
+        <button type="submit">Display All Users</button>
+    </form>
+    <form action="/professors" method="get">
+        <button type="submit">Display All Professors</button>
+    </form>
+    <form action="/student" method="get">
+        <button type="submit">Display All Student</button>
+    </form>
+</div>
+<div class="container">
+    <h1 class="text-center">Manage University</h1>
+    <form action="/university" method="get">
+        <button type="submit">Display All Universities</button>
+    </form>
+    <hr>
+    <form action="/faculty" method="get">
+        <button type="submit">Display All Faculties</button>
+    </form>
+    <hr>
+    <form action="/course" method="get">
+        <button type="submit">Display All Courses</button>
+    </form>
+    <hr>
+    <form action="/group" method="get">
+        <button type="submit">Display All Groups</button>
+    </form>
+</div>
