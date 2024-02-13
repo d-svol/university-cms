@@ -2,6 +2,8 @@ package com.example.university.dto;
 
 import lombok.*;
 
+import java.util.List;
+
 @Setter
 @Getter
 @Data
@@ -11,6 +13,6 @@ import lombok.*;
 public class ProfessorDTO {
     private Long professorId;
     private String userName;
-    private String courseName;
+    private List<String> courseNames;
 }
 

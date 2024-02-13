@@ -48,9 +48,15 @@ CREATE TABLE student (
 CREATE TABLE professor (
     id      SERIAL PRIMARY KEY,
     user_id INTEGER,
+    FOREIGN KEY (user_id) REFERENCES user_entity(id) ON DELETE CASCADE
+);
+
+CREATE TABLE professor_course (
+    professor_id INTEGER,
     course_id INTEGER,
-    FOREIGN KEY (user_id) REFERENCES user_entity(id) ON DELETE CASCADE,
-    FOREIGN KEY (course_id) REFERENCES courses(id)
+    FOREIGN KEY (professor_id) REFERENCES professor(id),
+    FOREIGN KEY (course_id) REFERENCES courses(id),
+    PRIMARY KEY (professor_id, course_id)
 );
 
 CREATE TABLE schedule (
@@ -65,3 +71,4 @@ CREATE TABLE schedule (
     FOREIGN KEY (group_id) REFERENCES groups(id) ON DELETE CASCADE,
     FOREIGN KEY (professor_id) REFERENCES professor(id) ON DELETE CASCADE
 );
+

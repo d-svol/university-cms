@@ -23,7 +23,6 @@
 <body>
 <main class="container">
     <h1>Professors Page</h1>
-
     <section>
         <table class="table table-bordered">
             <thead>
@@ -39,7 +38,11 @@
             <tr th:each="professor : ${professors}">
                 <td th:text="${professor.professorId}"></td>
                 <td th:text="${professor.userName}"></td>
-                <td th:text="${professor.courseName}"></td>
+                <td>
+                    <ul>
+                        <li th:each="courseName : ${professor.courseNames}" th:text="${courseName}"></li>
+                    </ul>
+                </td>
                 <td sec:authorize="hasAuthority('ADMIN')">
                     <form th:action="@{/professors/delete(${professor.professorId})}" method="post">
                         <button type="submit" class="btn btn-danger">Delete</button>

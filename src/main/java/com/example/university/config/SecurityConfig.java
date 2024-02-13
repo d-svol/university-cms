@@ -31,6 +31,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(request -> request
                         .requestMatchers("/", "/home").permitAll()
                         .requestMatchers("/adminscab").hasAuthority("ADMIN")
+                        .requestMatchers("/user").hasAuthority("ADMIN")
                         .requestMatchers("/studentscab").hasAuthority("STUDENT")
                         .requestMatchers("/professorscab").hasAuthority("TEACHER")
                         .requestMatchers("/stuffscab").hasAuthority("STUFF")

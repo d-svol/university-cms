@@ -51,5 +51,9 @@ public class CourseService {
         course.setFacultyId(faculty.getId());
         courseRepository.save(course);
     }
+
+    public List<Course> findAllCoursesByProfessorUsername(String username) {
+        return courseRepository.findAllCoursesByProfessorUsername(username);
+    }
 }
 

@@ -1,9 +1,11 @@
 package com.example.university.controller.user;
 
 import com.example.university.dto.ProfessorDTO;
+import com.example.university.model.university.Course;
 import com.example.university.service.university.CourseService;
 import com.example.university.service.user.ProfessorService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +25,7 @@ public class ProfessorController {
 
     @GetMapping
     public String professorPage(Model model) {
-        List<ProfessorDTO> professorDTOs = professorService.getAllProfessors();
+        List<ProfessorDTO> professorDTOs = professorService.getAllProfessorDTOs();
         model.addAttribute("professors", professorDTOs);
         model.addAttribute("courses", courseService.getAllCoursesDTO());
         return "/users/professors";
@@ -37,5 +39,13 @@ public class ProfessorController {
         redirectAttributes.addFlashAttribute("successMessage", "Professor updated successfully");
 
         return "redirect:/professors";
+    }
+
+    @GetMapping("/courses")
+    public String listProfessorCourses(Authentication authentication, Model model) {
+        String username = authentication.getName();
+        List<Course> courses = courseService.findAllCoursesByProfessorUsername(username);
+        model.addAttribute("courses", courses);
+        return "professors/courses";
     }
 }

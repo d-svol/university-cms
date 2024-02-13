@@ -32,10 +32,14 @@ INSERT INTO student(id, group_id) VALUES
 (2, 1), -- 'student' 'AA-01'
 (5, 1); -- 'StudentUsername' 'AA-01'
 
-INSERT INTO professor (user_id, course_id)
-SELECT id, 1
-FROM user_entity
-WHERE role_id = 3;	-- 'TeacherUsername' and 'professor' / course_id ==> 'Mathematics'
+INSERT INTO professor (user_id) VALUES
+(3), -- 'professor'
+(6); -- 'TeacherUsername'
+
+INSERT INTO professor_course (professor_id, course_id) VALUES
+(1, 1), -- 'professor' assigned to 'Mathematics'
+(1, 2), -- 'professor' assigned to 'Computer Science'
+(2, 3); -- 'TeacherUsername' assigned to 'History'
 
 INSERT INTO schedule (course_id, group_id, professor_id, start_time, end_time, date) VALUES
 (1, 1, 1, '2023-07-07 09:00:00', '2023-07-07 11:00:00', '2023-07-07'), -- course-'Mathematics' / group-'AA-01'/ professor-'professor'

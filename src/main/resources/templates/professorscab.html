@@ -63,36 +63,7 @@
 </head>
 <body>
 <main id="main">
-    <div class="container">
-        <h2 class="text-center">Manage Users</h2>
-        <form action="/user" method="get">
-            <button type="submit">Display All Users</button>
-        </form>
-        <form action="/professors" method="get">
-            <button type="submit">Display All Professors</button>
-        </form>
-        <form action="/student" method="get">
-            <button type="submit">Display All Student</button>
-        </form>
-    </div>
-    <div class="container">
-        <h1 class="text-center">Professor Panel</h1>
-        <form action="/university" method="get">
-            <button type="submit">Display All Universities</button>
-        </form>
-        <hr>
-        <form action="/faculty" method="get">
-            <button type="submit">Display All Faculties</button>
-        </form>
-        <hr>
-        <form action="/course" method="get">
-            <button type="submit">Display All Courses</button>
-        </form>
-        <hr>
-        <form action="/group" method="get">
-            <button type="submit">Display All Groups</button>
-        </form>
-    </div>
+    <div th:replace="fragments/navigation.html"></div>
 
     <div class="container">
         <h2 class="text-center">Manage my profile</h2>
@@ -107,25 +78,9 @@
                 </form>
             </li>
             <li>
-                <!-- Change Username Form -->
-                <form th:action="@{/professorscab/changeusername}" method="post">
-                    <input type="hidden" name="userId" th:value="${professor.id}"/>
-                    <input type="text" name="newUsername" placeholder="New Name" required/>
-                    <button type="submit">Change Name</button>
-                </form>
-            </li>
-            <li>
-                <!-- Change Faculty Form -->
-                <form th:action="@{/studentscab/changefaculty}" method="post">
-                    <label for="newFacultyId">Choose a new faculty:</label>
-                    <select name="newFacultyId" id="newFacultyId">
-                        <option th:each="faculty : ${availableFaculties}"
-                                th:value="${faculty.id}"
-                                th:text="${faculty.facultyName}">Select a faculty
-                        </option>
-                    </select>
-                    <input type="hidden" name="userId" th:value="${userId}"/>
-                    <button type="submit">Change Faculty</button>
+                <!-- Get Courses Form -->
+                <form th:action="@{/professors/courses}" method="get">
+                    <button type="submit">Get my courses</button>
                 </form>
             </li>
         </ul>

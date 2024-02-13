@@ -1,10 +1,13 @@
 package com.example.university.model.user;
 
+import com.example.university.model.university.Course;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @Builder
@@ -20,6 +23,11 @@ public class Professor {
     @Column(name = "user_id")
     private Long userId;
 
-    @Column(name = "course_id")
-    private Long courseId;
+    @ManyToMany
+    @JoinTable(
+            name = "professor_course",
+            joinColumns = @JoinColumn(name = "professor_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id")
+    )
+    private List<Course> courses;
 }

@@ -45,7 +45,7 @@
         </tbody>
     </table>
 
-    <form th:action="@{/faculty/add}" method="post" class="form-inline">
+    <form th:action="@{/faculty/add}" method="post" class="form-inline" sec:authorize="hasAnyAuthority('ADMIN', 'STUFF')">
         <input type="text" placeholder="Faculty Name" class="form-control mr-2"/>
         <button type="submit" class="btn btn-success">Add Faculty</button>
     </form>
