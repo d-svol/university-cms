@@ -4,7 +4,6 @@ import com.example.university.dto.ScheduleDTO;
 import com.example.university.model.university.Schedule;
 import com.example.university.repository.CourseRepository;
 import com.example.university.repository.GroupRepository;
-import com.example.university.repository.ProfessorRepository;
 import com.example.university.service.university.ScheduleService;
 import com.example.university.service.user.ProfessorService;
 import lombok.RequiredArgsConstructor;
@@ -15,9 +14,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 @Controller
 @RequiredArgsConstructor

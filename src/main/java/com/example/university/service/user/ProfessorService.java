@@ -17,7 +17,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ProfessorService {
-    private static final Logger log = LoggerFactory.getLogger(ProfessorService.class);
     private final ProfessorRepository professorRepository;
     private final UserRepository userRepository;
     private final CourseRepository courseRepository;
@@ -64,5 +63,4 @@ public class ProfessorService {
 
         return dto;
     }
-
 }

@@ -3,10 +3,8 @@ package com.example.university.dto;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 
 @Setter
 @Getter
