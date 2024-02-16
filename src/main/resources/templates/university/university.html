@@ -18,9 +18,7 @@
             cursor: pointer;
         }
     </style>
-    <div th:replace="fragments/login-dashboard.html"></div>
-</head>
-
+    <div th:insert="~{fragments/login-dashboard :: loginFragment}"></div>
 <body>
 <div class="container top-buffer">
     <h1 class="text-center">University Page</h1>

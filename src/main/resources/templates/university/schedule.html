@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       lang="en">
 <head>
     <meta charset="UTF-8">
@@ -17,48 +18,155 @@
         }
         .form-inline { margin-top: 15px; }
     </style>
-    <div th:replace="fragments/login-dashboard.html"></div>
+    <div th:insert="~{fragments/login-dashboard :: loginFragment}"></div>
 </head>
 <body>
 <main class="container">
     <h1>Schedule Page</h1>
-
+    <div th:if="${successMessage}" class="alert alert-success" th:text="${successMessage}"></div>
+    <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
+    <button sec:authorize="hasAnyAuthority('ADMIN', 'STUFF')" type="button" class="btn btn-primary" data-toggle="modal"
+            data-target="#addScheduleModal">
+        Add Schedule
+    </button>
     <table class="table table-bordered">
         <thead>
         <tr>
             <th>Schedule ID</th>
-            <th>Group ID</th>
-            <th>Professor ID</th>
-            <th>Course ID</th>
+            <th>Group</th>
+            <th>Professor</th>
+            <th>Course</th>
             <th>Start Time</th>
             <th>End Time</th>
             <th>Date</th>
-            <th>Delete</th>
-            <th>Edit</th>
+            <th sec:authorize="hasAnyAuthority('ADMIN', 'STUFF')">Delete</th>
+            <th sec:authorize="hasAnyAuthority('ADMIN', 'STUFF')">Edit</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="schedule : ${schedules}">
-            <td th:text="${schedule.id}"></td>
-            <td th:text="${schedule.groupId}"></td>
-            <td th:text="${schedule.professorId}"></td>
-            <td th:text="${schedule.courseId}"></td>
+        <tr th:each="schedule : ${schedulesDTO}">
+            <td th:text="${schedule.scheduleId}"></td>
+            <td th:text="${schedule.groupName}"></td>
+            <td th:text="${schedule.professorName}"></td>
+            <td th:text="${schedule.courseName}"></td>
             <td th:text="${schedule.startTime}"></td>
             <td th:text="${schedule.endTime}"></td>
             <td th:text="${schedule.date}"></td>
-            <td>
-                <form th:action="@{/schedule/delete(${schedule.id})}" method="post">
+            <td sec:authorize="hasAnyAuthority('ADMIN', 'STUFF')">
+                <form th:action="@{/schedule/delete}" method="post">
+                    <input type="hidden" name="scheduleId" th:value="${schedule.scheduleId}"/>
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
             </td>
-            <td>
-                <button type="button" class="btn btn-primary">Edit</button>
+            <td sec:authorize="hasAnyAuthority('ADMIN', 'STUFF')">
+
+                <button type="button" class="btn btn-primary"
+                        th:data-target="${'#editScheduleModal' + schedule.scheduleId}"
+                        data-toggle="modal">
+                    Edit
+                </button>
             </td>
         </tr>
         </tbody>
     </table>
 
+    <!-- Edit Schedules Modal -->
+    <div th:each="schedule : ${schedulesDTO}">
+        <div th:id="${'editScheduleModal' + schedule.scheduleId}" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit Student</h5>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form th:action="@{/schedule/edit}" th:object="${scheduleDTO}" method="post">
+                            <input type="hidden" name="scheduleId" th:value="${schedule.scheduleId}"/>
+                            <input type="hidden" name="groupName" th:value="${schedule.groupName}"/>
+                            <input type="hidden" name="professorName" th:value="${schedule.professorName}"/>
+                            <input type="hidden" name="courseName" th:value="${schedule.courseName}"/>
+                            <div class="form-group">
+                                <label for="startTime">Start Time</label>
+                                <input type="time" th:field="*{startTime}" id="startTime"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="endTime">End Time</label>
+                                <input type="time" th:field="*{endTime}" id="endTime"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="date">Date</label>
+                                <input type="date" th:field="*{date}" id="date"/>
+                            </div>
+                            <button type="submit" class="btn btn-success">Save Changes</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Schedule Modal -->
+    <div class="modal fade" id="addScheduleModal" tabindex="-1" role="dialog" aria-labelledby="addScheduleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addScheduleModalLabel">Add Schedule</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form th:action="@{/schedule/add}" method="post" th:object="${schedule}" id="addScheduleForm">
+                        <div class="form-group">
+                            <label for="editGroupId">Group</label>
+                            <select id="editGroupId" name="groupId" class="form-control" required>
+                                <option th:each="group : ${groups}" th:value="${group.id}"
+                                        th:text="${group.groupName}">Select Group
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="editProfessorId">Professor</label>
+                            <select id="editProfessorId" name="professorId" class="form-control" required>
+                                <option th:each="professor : ${professors}" th:value="${professor.professorId}"
+                                        th:text="${professor.userName}">Select Professor
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="editCourseId">Course</label>
+                            <select id="editCourseId" name="courseId" class="form-control" required>
+                                <option th:each="course : ${courses}" th:value="${course.id}"
+                                        th:text="${course.name}">Select Course
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="startTime">Start Time</label>
+                            <input type="time" th:field="*{startTime}" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="endTime">End Time</label>
+                            <input type="time" th:field="*{endTime}" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Date</label>
+                            <input type="date" th:field="*{date}" class="form-control"/>
+                        </div>
+                        <button type="submit" class="btn btn-success">Add Schedule</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <a th:href="@{/adminscab}" sec:authorize="hasAuthority('ADMIN')" class="btn btn-primary mt-4">Go to Admin Panel</a>
 </main>
 </body>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
 </html>

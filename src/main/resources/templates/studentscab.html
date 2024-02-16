@@ -59,11 +59,11 @@
             text-align: center;
         }
     </style>
-    <div th:replace="fragments/login-dashboard.html"></div>
+    <div th:insert="~{fragments/login-dashboard :: loginFragment}"></div>
 </head>
 <body>
 <main id="main">
-    <div th:replace="fragments/navigation.html"></div>
+    <div th:replace="~{fragments/navigation.html}"></div>
 
     <div class="container">
         <li>

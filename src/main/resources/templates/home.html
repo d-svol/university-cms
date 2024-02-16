@@ -14,7 +14,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <div th:replace="fragments/login-dashboard"></div>
+            <div th:insert="~{fragments/login-dashboard :: loginFragment}"></div>
         </div>
     </div>
 </nav>

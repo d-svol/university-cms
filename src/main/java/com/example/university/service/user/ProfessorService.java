@@ -27,6 +27,12 @@ public class ProfessorService {
         return professors.stream().map(this::convertToDTO).toList();
     }
 
+    public ProfessorDTO getProfessorDTOById(Long id) {
+        Professor professor = professorRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Professor not found with id: " + id));
+        return convertToDTO(professor);
+    }
+
     public void editProfessor(Long professorId, Long courseId) {
         Professor professor = professorRepository.findById(professorId)
                 .orElseThrow(() -> new EntityNotFoundException("Invalid professor ID"));

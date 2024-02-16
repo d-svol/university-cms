@@ -42,6 +42,6 @@ INSERT INTO professor_course (professor_id, course_id) VALUES
 (2, 3); -- 'TeacherUsername' assigned to 'History'
 
 INSERT INTO schedule (course_id, group_id, professor_id, start_time, end_time, date) VALUES
-(1, 1, 1, '2023-07-07 09:00:00', '2023-07-07 11:00:00', '2023-07-07'), -- course-'Mathematics' / group-'AA-01'/ professor-'professor'
-(2, 1, 1, '2023-07-08 10:00:00', '2023-07-08 12:00:00', '2023-07-08'), -- course-'Computer Science' / group-'AA-01' / professor-'professor'
-(3, 1, 1, '2023-07-07 14:00:00', '2023-07-07 16:00:00', '2023-07-07'); -- course-'History' / group-'AA-01' / professor-'professor'
+(1, 1, 1, '09:00:00', '11:00:00', '2023-07-07'), -- course-'Mathematics' / group-'AA-01'/ professor-'professor'
+(2, 1, 1, '10:00:00', '12:00:00', '2023-07-08'), -- course-'Computer Science' / group-'AA-01' / professor-'professor'
+(3, 1, 1, '14:00:00', '16:00:00', '2023-07-07'); -- course-'History' / group-'AA-01' / professor-'professor'

@@ -1,11 +1,13 @@
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 
-<div sec:authorize="isAuthenticated()">
-    <form th:action="@{/logout}" method="post">
-        <button type="submit" class="btn btn-primary">Logout</button>
-    </form>
-</div>
+<div th:fragment="loginFragment" xmlns:th="http://www.thymeleaf.org">
+    <div sec:authorize="isAuthenticated()" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+        <form th:action="@{/logout}" method="post" xmlns:th="http://www.thymeleaf.org">
+            <button type="submit" class="btn btn-primary">Logout</button>
+        </form>
+    </div>
 
-<div sec:authorize="!isAuthenticated()">
-    <a href="/login" class="btn btn-primary">Login</a>
+    <div sec:authorize="!isAuthenticated()" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+        <a href="/login" class="btn btn-primary">Login</a>
+    </div>
 </div>

@@ -41,14 +41,14 @@ public class UserController {
     @PostMapping("edit")
     public String editUser(@ModelAttribute UserDTO userDTO, RedirectAttributes redirectAttributes) {
         userService.updateUser(userDTO);
-        redirectAttributes.addFlashAttribute("successMessage", "User successfully added.");
+        redirectAttributes.addFlashAttribute("successMessage", "User successfully edit.");
         return "redirect:/user";
     }
 
     @PostMapping("delete")
     public String deleteUser(@RequestParam Long userId, RedirectAttributes redirectAttributes) {
         userService.deleteUserById(userId);
-        redirectAttributes.addFlashAttribute("successMessage", "User successfully added.");
+        redirectAttributes.addFlashAttribute("successMessage", "User successfully delete.");
         return "redirect:/user";
     }
 }

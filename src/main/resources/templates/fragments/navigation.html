@@ -1,6 +1,7 @@
 <div class="container">
     <h2 class="text-center">Manage Users</h2>
-    <form action="/user" method="get" sec:authorize="hasAnyAuthority('ADMIN', 'STUFF')">
+    <form action="/user" method="get" sec:authorize="hasAnyAuthority('ADMIN', 'STUFF')"
+          xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
         <button type="submit">Display All Users</button>
     </form>
     <form action="/professors" method="get">
@@ -26,5 +27,8 @@
     <hr>
     <form action="/group" method="get">
         <button type="submit">Display All Groups</button>
+    </form>
+    <form action="/schedule" method="get">
+        <button type="submit">Display All Schedule</button>
     </form>
 </div>

@@ -18,7 +18,7 @@
         }
         .form-inline { margin-top: 15px; }
     </style>
-    <div th:replace="fragments/login-dashboard.html"></div>
+    <div th:insert="~{fragments/login-dashboard :: loginFragment}"></div>
 </head>
 <body>
 <main class="container">

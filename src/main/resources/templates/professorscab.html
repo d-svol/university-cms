@@ -59,24 +59,17 @@
             text-align: center;
         }
     </style>
-    <div th:replace="fragments/login-dashboard.html"></div>
+    <div th:insert="~{fragments/login-dashboard :: loginFragment}"></div>
 </head>
 <body>
 <main id="main">
-    <div th:replace="fragments/navigation.html"></div>
+    <div th:replace="~{fragments/navigation.html}"></div>
 
     <div class="container">
         <h2 class="text-center">Manage my profile</h2>
         <p>My Name: <span th:text="${professor.username}"></span></p>
 
         <ul class="list-unstyled">
-            <li>
-                <!-- Get Schedule Form -->
-                <form th:action="@{/professorscab/schedule}" method="get">
-                    <input type="hidden" name="userId" th:value="${professor.id}"/>
-                    <button type="submit">Get my schedule</button>
-                </form>
-            </li>
             <li>
                 <!-- Get Courses Form -->
                 <form th:action="@{/professors/courses}" method="get">
