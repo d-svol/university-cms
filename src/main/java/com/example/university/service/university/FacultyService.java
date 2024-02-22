@@ -15,7 +15,6 @@ import java.util.Optional;
 public class FacultyService {
     private final FacultyRepository facultyRepository;
 
-
     public List<Faculty> getAllFaculties() {
         return facultyRepository.findAll();
     }

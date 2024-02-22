@@ -47,7 +47,8 @@
         </tbody>
     </table>
 
-    <form class="form-inline" method="post" sec:authorize="hasAnyAuthority('ADMIN', 'STUFF')" th:action="@{/faculties/add}"
+    <form class="form-inline" method="post" sec:authorize="hasAnyAuthority('ADMIN', 'STUFF')"
+          th:action="@{/faculties/add}"
           th:object="${faculty}">
         <div class="form-group">
             <label for="facultyName">Faculty Name</label>
@@ -72,7 +73,8 @@
                             <input name="id" th:value="${faculty.id}" type="hidden"/>
                             <div class="form-group">
                                 <label for="editFacultyName">Faculty Name</label>
-                                <input class="form-control" id="editFacultyName" name="facultyName" th:field="*{facultyName}"
+                                <input class="form-control" id="editFacultyName" name="facultyName"
+                                       th:field="*{facultyName}"
                                        type="text"/>
                             </div>
                             <input name="universityId" th:value="${faculty.universityId}" type="hidden"/>

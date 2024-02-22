@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 public class StudentDTO {
     public Long studentId;
     public String studentName;
-    public String groupName;
     private Long groupId;
+    public String groupName;
 }
