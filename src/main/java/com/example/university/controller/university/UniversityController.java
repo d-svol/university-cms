@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/university")
+@RequestMapping("/universities")
 public class UniversityController {
 
     private final UniversityService universityService;
@@ -21,7 +21,7 @@ public class UniversityController {
     @GetMapping
     public String listUniversities(Model model) {
         model.addAttribute("university", universityService.getAllUniversities());
-        return "university/university";
+        return "university/universities";
     }
 }
 

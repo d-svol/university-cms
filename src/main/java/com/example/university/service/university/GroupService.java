@@ -1,11 +1,11 @@
 package com.example.university.service.university;
 
-import com.example.university.customexception.EntityNotFoundException;
 import com.example.university.dto.GroupDTO;
 import com.example.university.model.university.Course;
 import com.example.university.model.university.Group;
 import com.example.university.repository.CourseRepository;
 import com.example.university.repository.GroupRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

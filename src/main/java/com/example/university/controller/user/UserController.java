@@ -16,7 +16,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
     private final UserService userService;
     private final RoleService roleService;
@@ -28,21 +28,21 @@ public class UserController {
 
         model.addAttribute("users", users);
         model.addAttribute("roles", roles);
-        return "users/user";
+        return "users/users";
     }
 
     @PostMapping("add")
     public String addUser(@ModelAttribute UserDTO userDTO, RedirectAttributes redirectAttributes) {
         userService.addUser(userDTO);
         redirectAttributes.addFlashAttribute("successMessage", "User successfully added.");
-        return "redirect:/user";
+        return "redirect:/users";
     }
 
     @PostMapping("edit")
     public String editUser(@ModelAttribute UserDTO userDTO, RedirectAttributes redirectAttributes) {
         userService.updateUser(userDTO);
         redirectAttributes.addFlashAttribute("successMessage", "User successfully edit.");
-        return "redirect:/user";
+        return "redirect:/users";
     }
 
     @PostMapping("delete")

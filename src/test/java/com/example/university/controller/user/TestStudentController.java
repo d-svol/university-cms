@@ -42,9 +42,9 @@ class TestStudentController {
         );
         Mockito.when(studentService.getAllStudents()).thenReturn(students);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/student"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/students"))
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("/users/student"))
+                .andExpect(MockMvcResultMatchers.view().name("/users/students"))
                 .andExpect(MockMvcResultMatchers.model().attributeExists("students"));
     }
 
@@ -53,13 +53,13 @@ class TestStudentController {
     public void editStudent_ShouldReturnStudents() throws Exception {
         doNothing().when(studentService).updateStudentGroup(any());
 
-        mockMvc.perform(post("/student/edit")
+        mockMvc.perform(post("/students/edit")
                         .queryParam("studentId", "1")
                         .queryParam("studentName", "FirstName")
                         .queryParam("groupId", "2")
                         .queryParam("groupName", "SecondGroup")
                         .with(csrf()))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/student"));
+                .andExpect(redirectedUrl("/students"));
     }
 }

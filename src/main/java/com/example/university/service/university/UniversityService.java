@@ -15,13 +15,5 @@ public class UniversityService {
     public List<University> getAllUniversities() {
         return universityRepository.findAll();
     }
-
-    public void saveUniversity(University university) {
-        universityRepository.save(university);
-    }
-
-    public void deleteUniversity(Long universityId) {
-        universityRepository.deleteById(universityId);
-    }
 }
 

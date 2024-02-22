@@ -1,15 +1,13 @@
 package com.example.university.service.user;
 
-import com.example.university.customexception.EntityNotFoundException;
 import com.example.university.dto.ProfessorDTO;
 import com.example.university.model.university.Course;
 import com.example.university.model.user.Professor;
 import com.example.university.repository.CourseRepository;
 import com.example.university.repository.ProfessorRepository;
 import com.example.university.repository.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.example.university.controller.university;
 
-import com.example.university.model.university.Schedule;
+import com.example.university.dto.ScheduleDTO;
 import com.example.university.repository.CourseRepository;
 import com.example.university.repository.GroupRepository;
 import com.example.university.service.university.ScheduleService;
@@ -16,9 +16,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -45,24 +44,23 @@ public class TestScheduleController {
 
     @Test
     public void schedulePage_ShouldReturnSchedule() throws Exception {
-        List<Schedule> schedules = Arrays.asList(
-                new Schedule(1L, 1L, 1L, 1L, LocalTime.parse("09:00:00"), LocalTime.parse("2023-07-07T11:00:00"), LocalDate.parse("2023-07-07")),
-                new Schedule(2L, 2L, 1L, 1L, LocalTime.parse("10:00:00"), LocalTime.parse("2023-07-08T12:00:00"), LocalDate.parse("2023-07-08"))
-        );
+        List<ScheduleDTO> schedules = new ArrayList<>();
+        schedules.add(new ScheduleDTO(1L, "GroupA", "ProfessorA", "Math", LocalTime.of(12, 0), LocalTime.of(14, 0), LocalDate.of(2022, 1, 1)));
+        Mockito.when(scheduleService.getFilteredSchedules(Mockito.any(LocalDate.class), Mockito.any(LocalDate.class))).thenReturn(schedules);
 
-        Mockito.when(scheduleService.getAllSchedule()).thenReturn(schedules);
-
-        mockMvc.perform(MockMvcRequestBuilders.get("/schedule"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/schedules")
+                        .param("startDate", "2022-01-01")
+                        .param("endDate", "2022-01-31"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("/university/schedule"))
-                .andExpect(MockMvcResultMatchers.model().attributeExists("schedules"));
+                .andExpect(MockMvcResultMatchers.view().name("university/schedules"))
+                .andExpect(MockMvcResultMatchers.model().attributeExists("scheduleDTO"));
     }
 
     @Test
     void testEditSchedule_ShouldEditSchedule() throws Exception {
         doNothing().when(scheduleService).updateSchedule(any());
 
-        mockMvc.perform(post("/schedule/edit")
+        mockMvc.perform(post("/schedules/edit")
                         .param("scheduleId", "1")
                         .param("groupName", "GroupName")
                         .param("professorName", "ProfessorName")
@@ -72,14 +70,14 @@ public class TestScheduleController {
                         .param("date", "2024-07-07")
                         .with(csrf()))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/schedule"));
+                .andExpect(redirectedUrl("/schedules"));
     }
 
     @Test
     void testAddSchedule_ShouldAddSchedule() throws Exception {
         doNothing().when(scheduleService).addSchedule(any());
 
-        mockMvc.perform(post("/schedule/add")
+        mockMvc.perform(post("/schedules/add")
                         .queryParam("groupId", "1")
                         .queryParam("professorId", "2")
                         .queryParam("courseId", "3")
@@ -88,7 +86,7 @@ public class TestScheduleController {
                         .queryParam("date", "2023-07-07")
                         .with(csrf()))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/schedule"));
+                .andExpect(redirectedUrl("/schedules"));
     }
 
 }

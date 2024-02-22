@@ -2,16 +2,14 @@ package com.example.university.model.user;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 
 @Entity
-@Getter
-@Setter
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "user_entity")
 public class UserEntity {
     @Id
@@ -24,4 +22,10 @@ public class UserEntity {
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
+
+    public UserEntity(String username, String password, Role role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
 }

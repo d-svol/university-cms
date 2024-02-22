@@ -1,11 +1,11 @@
 package com.example.university.service.user;
 
-import com.example.university.customexception.EntityNotFoundException;
 import com.example.university.dto.UserDTO;
 import com.example.university.model.user.Role;
 import com.example.university.model.user.UserEntity;
 import com.example.university.repository.UserRepository;
 import io.micrometer.common.util.StringUtils;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -41,12 +41,11 @@ public class UserService {
     }
 
     public void addUser(UserDTO userDTO) {
-        UserEntity user = new UserEntity();
-        user.setUsername(userDTO.getUsername());
-        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        String username = userDTO.getUsername();
+        String password = passwordEncoder.encode(userDTO.getPassword());
         Role role = roleService.getRoleByName(userDTO.getRoleName())
                 .orElseThrow(() -> new EntityNotFoundException("Role not found: " + userDTO.getRoleName()));
-        user.setRole(role);
+        UserEntity user = new UserEntity(username, password, role);
         userRepository.save(user);
     }
 
@@ -57,10 +56,10 @@ public class UserService {
     public void updateUser(UserDTO userDTO) {
         Optional<UserEntity> existingUser = userRepository.findByUsername(userDTO.getUsername());
 
-        if (existingUser.isPresent() && !existingUser.get().getUsername().equals(userDTO.getUsername())) {
+        if (existingUser.isEmpty()) {
             throw new EntityNotFoundException("Username already taken!");
         } else {
-            UserEntity user = existingUser.orElse(new UserEntity());
+            UserEntity user = existingUser.get();
             user.setUsername(userDTO.getUsername());
             user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
             Role role = roleService.getRoleByName(userDTO.getRoleName())

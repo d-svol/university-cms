@@ -1,6 +1,5 @@
 package com.example.university.service.user;
 
-import com.example.university.customexception.EntityNotFoundException;
 import com.example.university.dto.StudentDTO;
 import com.example.university.model.university.Group;
 import com.example.university.model.user.Student;
@@ -8,6 +7,7 @@ import com.example.university.model.user.UserEntity;
 import com.example.university.repository.GroupRepository;
 import com.example.university.repository.StudentRepository;
 import com.example.university.repository.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +27,10 @@ public class StudentService {
         return students.stream()
                 .map(this::convertToStudentDTO)
                 .collect(Collectors.toList());
+    }
+
+    public StudentDTO getStudentDTOByName(String username) {
+        return studentRepository.getStudentDTOByName(username);
     }
 
     public void updateStudentGroup(StudentDTO studentDTO) {

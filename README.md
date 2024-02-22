@@ -10,7 +10,7 @@ To ensure the proper functioning of the project, follow these steps
     docker-compose up
     ```
 
-  
+
 2. Run the project
 
 ### 3. Accessing the Application
@@ -20,40 +20,58 @@ Navigate to: http://localhost:8080/
 Here, you will find your application up and running.
 
 ### 4. Login Credentials <br>
-####   Admin Panel <br>
+
+#### Admin Panel <br>
+
 Username: admin <br>
 Password: admin <br>
-####   Student Panel <br>
+
+#### Student Panel <br>
+
 Username: student <br>
 Password: student <br>
-####   Professor Panel <br>
+
+#### Professor Panel <br>
+
 Username: professor <br>
 Password: professor <br>
-####   Professor Panel <br>
+
+#### Professor Panel <br>
+
 Username: stuff <br>
 Password: stuff <br>
-
 
 ## Other Important Steps
 
 **User Stories:**
 
-1. **Teacher Views Daily Timetable:**
-    - *Given* the user is logged in as a teacher.
-    - *When* the user navigates to the "My Schedule" menu.
-    - *Then* the user should see and navigate their daily schedule for the selected date.
+1. **Anonymous:**
+    - *Given* the user is not logged in.
+    - *Then* they can **read** all courses with basic information.
+    - *When* the anonymous user navigates to another menu, they are prompted to log in.
 
-2. **Teacher Views Monthly Timetable:**
-    - *Given* the user is logged in as a teacher.
-    - *When* the user accesses the "My Schedule" menu.
-    - *Then* the user should be able to view and navigate their monthly schedule for the selected month and year.
 
-3. **Student Views Daily Timetable:**
-    - *Given* the user is logged in as a student.
-    - *When* the user goes to the "My Schedule" section.
-    - *Then* the user should see and navigate their daily schedule for the selected date.
+2. **Admin:**
+    - *Given* the user is logged in as **Admin**.
+    - *Then* they can **read** universities information.
+    - *Then* they can **read, update** professors / students information.
+    - *Then* they can **read, create, update, delete** courses / groups / faculties / schedules / users information.
 
-4. **Student Views Monthly Timetable:**
-    - *Given* the user is logged in as a student.
-    - *When* the user visits the "My Schedule" area.
-    - *Then* the user should have the ability to view and navigate their monthly schedule for the selected month and year.
+
+3. **Stuff:**
+    - *Given* the user is logged in as **Stuff**.
+    - *Then* they can **read**, universities information.
+    - *Then* they can **read, update** professors / students information.
+    - *Then* they can **read, create, update** courses / groups / faculties / schedules / users information.
+
+
+4. **Professor:**
+    - *Given* the user is logged in as **Professor**.
+    - *Then* they can **read** information about universities / professors / students / courses / groups / faculties /
+      schedules.
+    - *Then* they can **read** their own schedule.
+
+
+5. **Student:**
+    - *Given* the user is logged in as **Student**.
+    - *Then* **read** information about universities / professors / students / courses / groups / faculties / schedules.

@@ -1,34 +1,40 @@
-<div class="container">
+<div class="container" sec:authorize="isAuthenticated()" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <h2 class="text-center">Manage Users</h2>
-    <form action="/user" method="get" sec:authorize="hasAnyAuthority('ADMIN', 'STUFF')"
+    <form action="/users" method="get" sec:authorize="hasAnyAuthority('ADMIN', 'STUFF')"
           xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
         <button type="submit">Display All Users</button>
     </form>
     <form action="/professors" method="get">
         <button type="submit">Display All Professors</button>
     </form>
-    <form action="/student" method="get">
+    <form action="/students" method="get">
         <button type="submit">Display All Student</button>
     </form>
 </div>
 <div class="container">
-    <h1 class="text-center">Manage University</h1>
-    <form action="/university" method="get">
-        <button type="submit">Display All Universities</button>
-    </form>
-    <hr>
-    <form action="/faculty" method="get">
-        <button type="submit">Display All Faculties</button>
-    </form>
-    <hr>
-    <form action="/course" method="get">
-        <button type="submit">Display All Courses</button>
-    </form>
-    <hr>
-    <form action="/group" method="get">
-        <button type="submit">Display All Groups</button>
-    </form>
-    <form action="/schedule" method="get">
-        <button type="submit">Display All Schedule</button>
-    </form>
+    <div>
+        <h1 class="text-center">Manage University</h1>
+        <form action="/universities" method="get">
+            <button type="submit">Display All Universities</button>
+        </form>
+        <hr>
+        <form action="/faculties" method="get">
+            <button type="submit">Display All Faculties</button>
+        </form>
+        <hr>
+        <form action="/groups" method="get">
+            <button type="submit">Display All Groups</button>
+        </form>
+        <hr>
+        <form action="/schedules" method="get">
+            <button type="submit">Display All Schedule</button>
+        </form>
+        <hr>
+    </div>
+    <div>
+        <form action="/courses" method="get">
+            <button type="submit">Display All Courses</button>
+        </form>
+    </div>
 </div>
+

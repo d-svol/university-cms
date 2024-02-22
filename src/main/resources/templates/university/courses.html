@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <title>Courses Page</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         .container { margin: auto; }
@@ -27,10 +27,10 @@
 <div class="container top-buffer">
     <h1 class="text-center">Courses Page</h1>
 
-    <div th:if="${successMessage}" class="alert alert-success" th:text="${successMessage}"></div>
-    <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
-    <button sec:authorize="hasAnyAuthority('ADMIN', 'STUFF')" type="button" class="btn btn-primary" data-toggle="modal"
-            data-target="#addCourseModal">
+    <div class="alert alert-success" th:if="${successMessage}" th:text="${successMessage}"></div>
+    <div class="alert alert-danger" th:if="${errorMessage}" th:text="${errorMessage}"></div>
+    <button class="btn btn-primary" data-target="#addCourseModal" data-toggle="modal" sec:authorize="hasAnyAuthority('ADMIN', 'STUFF')"
+            type="button">
         Add Course
     </button>
     <table class="table table-hover mt-4">
@@ -51,15 +51,15 @@
             <td th:text="${course.description}"></td>
             <td th:text="${course.facultyName}"></td>
             <td sec:authorize="hasAuthority('ADMIN')">
-                <form th:action="@{/course/delete}" method="post" class="d-inline">
-                    <input type="hidden" name="courseId" th:value="${course.id}"/>
-                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                <form class="d-inline" method="post" th:action="@{/courses/delete}">
+                    <input name="courseId" th:value="${course.id}" type="hidden"/>
+                    <button class="btn btn-danger btn-sm" type="submit">Delete</button>
                 </form>
             </td>
             <td sec:authorize="hasAnyAuthority('ADMIN', 'STUFF')">
-                <button type="button" class="btn btn-primary btn-sm"
+                <button class="btn btn-primary btn-sm" data-toggle="modal"
                         th:data-target="${'#editCourseModal' + course.id}"
-                        data-toggle="modal">
+                        type="button">
                     Edit
                 </button>
             </td>
@@ -68,34 +68,37 @@
 
         <!-- Edit Course Modal -->
         <div th:each="course : ${courses}">
-            <div th:id="'editCourseModal' + ${course.id}" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal fade" role="dialog" tabindex="-1" th:id="'editCourseModal' + ${course.id}">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title">Edit Course</h5>
-                            <button type="button" class="close" data-dismiss="modal">
+                            <button class="close" data-dismiss="modal" type="button">
                                 <span>&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form th:action="@{/course/edit}" th:object="${courseDTO}" method="post">
-                                <input type="hidden" name="id" th:value="${course.id}"/>
+                            <form method="post" th:action="@{/courses/edit}" th:object="${courseDTO}">
+                                <input name="id" th:value="${course.id}" type="hidden"/>
 
                                 <div class="form-group">
                                     <label for="name">Course Name</label>
-                                    <input type="text" name="name" class="form-control" th:value="${course.name}" required/>
+                                    <input class="form-control" name="name" required th:value="${course.name}"
+                                           type="text"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="description">Description</label>
-                                    <textarea name="description" class="form-control" th:text="${course.description}" required></textarea>
+                                    <textarea class="form-control" name="description" required
+                                              th:text="${course.description}"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="facultyId">Faculty</label>
-                                    <select name="facultyId" class="form-control" id="facultyId" required>
-                                        <option th:each="faculty : ${faculties}" th:value="${faculty.id}" th:text="${faculty.facultyName}"></option>
+                                    <select class="form-control" id="facultyId" name="facultyId" required>
+                                        <option th:each="faculty : ${faculties}" th:text="${faculty.facultyName}"
+                                                th:value="${faculty.id}"></option>
                                     </select>
                                 </div>
-                                <button type="submit" class="btn btn-success">Save Changes</button>
+                                <button class="btn btn-success" type="submit">Save Changes</button>
                             </form>
                         </div>
                     </div>
@@ -104,40 +107,43 @@
         </div>
 
         <!-- Model Add New Course -->
-        <div class="modal fade" id="addCourseModal" tabindex="-1" role="dialog">
+        <div class="modal fade" id="addCourseModal" role="dialog" tabindex="-1">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Add New Course</h5>
-                        <button type="button" class="close" data-dismiss="modal">
+                        <button class="close" data-dismiss="modal" type="button">
                             <span>&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form th:action="@{/course/add}" th:object="${courseDTO}" method="post">
+                        <form method="post" th:action="@{/courses/add}" th:object="${courseDTO}">
                             <div class="form-group">
                                 <label for="name">Course Name</label>
-                                <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Enter course name" required>
+                                <input class="form-control" id="name" placeholder="Enter course name" required
+                                       th:field="*{name}" type="text">
                             </div>
                             <div class="form-group">
                                 <label for="description">Course Description</label>
-                                <textarea th:field="*{description}" class="form-control" id="description" placeholder="Enter course description" required></textarea>
+                                <textarea class="form-control" id="description" placeholder="Enter course description"
+                                          required th:field="*{description}"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="faculty">Faculty</label>
-                                <select th:field="*{facultyId}" class="form-control" id="faculty" required>
-                                    <option th:each="faculty : ${faculties}" th:value="${faculty.id}" th:text="${faculty.facultyName}"></option>
+                                <select class="form-control" id="faculty" required th:field="*{facultyId}">
+                                    <option th:each="faculty : ${faculties}" th:text="${faculty.facultyName}"
+                                            th:value="${faculty.id}"></option>
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-success">Add Course</button>
+                            <button class="btn btn-success" type="submit">Add Course</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </table>
-    <a sec:authorize="hasAuthority('ADMIN')"
-       th:href="@{/adminscab}" class="btn btn-secondary mt-4">Go to Admin Panel</a>
+    <a class="btn btn-secondary mt-4"
+       sec:authorize="hasAuthority('ADMIN')" th:href="@{/adminscab}">Go to Admin Panel</a>
 </div>
 
 

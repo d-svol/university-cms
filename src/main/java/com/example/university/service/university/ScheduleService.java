@@ -1,6 +1,5 @@
 package com.example.university.service.university;
 
-import com.example.university.customexception.EntityNotFoundException;
 import com.example.university.dto.ProfessorDTO;
 import com.example.university.dto.ScheduleDTO;
 import com.example.university.model.university.Course;
@@ -10,9 +9,12 @@ import com.example.university.repository.CourseRepository;
 import com.example.university.repository.GroupRepository;
 import com.example.university.repository.ScheduleRepository;
 import com.example.university.service.user.ProfessorService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +33,25 @@ public class ScheduleService {
     public List<ScheduleDTO> getAllScheduleDTO() {
         List<Schedule> schedule = scheduleRepository.findAll();
         return schedule.stream().map(this::convertToDTO).toList();
+    }
+
+    public List<ScheduleDTO> getFilteredSchedules(LocalDate startDate, LocalDate endDate) {
+        return scheduleRepository.findAll().stream()
+                .map(this::convertToDTO)
+                .filter(scheduleDTO -> {
+                    LocalDate scheduleDate = scheduleDTO.getDate();
+                    if (startDate != null && endDate != null) {
+                        return !scheduleDate.isBefore(startDate) && !scheduleDate.isAfter(endDate);
+                    } else {
+                        return true;
+                    }
+                })
+                .sorted(Comparator.comparing(ScheduleDTO::getDate).thenComparing(ScheduleDTO::getStartTime))
+                .toList();
+    }
+
+    private boolean isWithinDateRange(LocalDate localDate, LocalDate startDate, LocalDate endDate) {
+        return !localDate.isBefore(startDate) && !localDate.isAfter(endDate);
     }
 
     public void updateSchedule(ScheduleDTO scheduleDTO) {

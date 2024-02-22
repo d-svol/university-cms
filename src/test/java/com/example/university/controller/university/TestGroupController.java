@@ -36,9 +36,9 @@ class TestGroupController {
         );
         Mockito.when(groupService.getAllGroupsDTOs()).thenReturn(groupDTOList);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/group"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/groups"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("university/group"))
+                .andExpect(MockMvcResultMatchers.view().name("university/groups"))
                 .andExpect(MockMvcResultMatchers.model().attributeExists("groups"))
                 .andExpect(MockMvcResultMatchers.model().attributeExists("courses"));
     }

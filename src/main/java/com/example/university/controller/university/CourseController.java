@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping("/course")
+@RequestMapping("/courses")
 public class CourseController {
     private final CourseService courseService;
     private final FacultyService facultyService;
@@ -27,27 +27,27 @@ public class CourseController {
         model.addAttribute("courseDTO", new CourseDTO());
         model.addAttribute("faculties", facultyService.getAllFaculties());
         model.addAttribute("courses", courseService.getAllCoursesDTO());
-        return "university/course";
+        return "university/courses";
     }
 
     @PostMapping("/add")
     public String addCourse(@ModelAttribute CourseDTO courseDTO, RedirectAttributes redirectAttributes) {
         courseService.createCourse(courseDTO);
         redirectAttributes.addFlashAttribute("successMessage", "Course successfully added.");
-        return "redirect:/course";
+        return "redirect:/courses";
     }
 
     @PostMapping("/delete")
     public String deleteCourse(@RequestParam Long courseId, RedirectAttributes redirectAttributes) {
         courseService.deleteCourse(courseId);
         redirectAttributes.addFlashAttribute("successMessage", "Course successfully deleted.");
-        return "redirect:/course";
+        return "redirect:/courses";
     }
 
     @PostMapping("/edit")
     public String editCourse(@ModelAttribute CourseDTO courseDTO, RedirectAttributes redirectAttributes) {
         courseService.updateCourse(courseDTO);
         redirectAttributes.addFlashAttribute("successMessage", "Course successfully updated.");
-        return "redirect:/course";
+        return "redirect:/courses";
     }
 }

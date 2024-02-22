@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping("/group")
+@RequestMapping("/groups")
 public class GroupController {
     private final GroupService groupService;
     private final CourseService courseService;
@@ -25,14 +25,14 @@ public class GroupController {
     public String listGroups(Model model) {
         model.addAttribute("groups", groupService.getAllGroupsDTOs());
         model.addAttribute("courses", courseService.getAllCoursesDTO());
-        return "university/group";
+        return "university/groups";
     }
 
-    @PostMapping("add")
+    @PostMapping("/add")
     public String addGroup(@RequestParam String groupName, @RequestParam Long courseId, RedirectAttributes redirectAttributes) {
         groupService.addGroup(groupName, courseId);
-        redirectAttributes.addFlashAttribute("successMessage", "Group added successfully!");
-        return "redirect:/group";
+        redirectAttributes.addFlashAttribute("successMessage", "Group successfully added!");
+        return "redirect:/groups";
     }
 
     @PostMapping("/edit")
@@ -41,14 +41,14 @@ public class GroupController {
                             @RequestParam Long courseId,
                             RedirectAttributes redirectAttributes) {
         groupService.updateGroup(groupId, groupName, courseId);
-        redirectAttributes.addFlashAttribute("successMessage", "Group updated successfully.");
-        return "redirect:/group";
+        redirectAttributes.addFlashAttribute("successMessage", "Group successfully updated .");
+        return "redirect:/groups";
     }
 
     @PostMapping("/delete")
     public String deleteGroup(@RequestParam("groupId") Long groupId, RedirectAttributes redirectAttributes) {
         groupService.deleteGroup(groupId);
         redirectAttributes.addFlashAttribute("successMessage", "Group successfully deleted.");
-        return "redirect:/group";
+        return "redirect:/groups";
     }
 }

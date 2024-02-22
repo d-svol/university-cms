@@ -34,8 +34,8 @@ class TestProfessorController {
     @WithMockUser
     void professorPage() throws Exception {
         List<ProfessorDTO> mockProfessors = Arrays.asList(
-                new ProfessorDTO(1L, "Professor 1", Arrays.asList("Course 1", "Course 2")),
-                new ProfessorDTO(2L, "Professor 2", Arrays.asList("Course 3"))
+                new ProfessorDTO(1L, "Professor 1", List.of("Course 1", "Course 2")),
+                new ProfessorDTO(2L, "Professor 2", List.of("Course 3"))
         );
 
         Mockito.when(professorService.getAllProfessorDTOs()).thenReturn(mockProfessors);

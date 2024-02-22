@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
+<html lang="en"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-      lang="en">
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Students Page</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .container { margin: auto; }
         .top-buffer { margin-top: 20px; }
@@ -38,9 +38,9 @@
                 <td th:text="${student.studentName}"></td>
                 <td th:text="${student.groupName}"></td>
                 <td sec:authorize="hasAnyAuthority('ADMIN', 'STUFF')">
-                    <button type="button" class="btn btn-primary btn-sm"
+                    <button class="btn btn-primary btn-sm" data-toggle="modal"
                             th:data-target="${'#editStudentModal' + student.studentId}"
-                            data-toggle="modal">Edit
+                            type="button">Edit
                     </button>
                 </td>
             </tr>
@@ -50,30 +50,30 @@
 
     <!-- Edit Student Modal -->
     <div th:each="student : ${students}">
-        <div th:id="${'editStudentModal' + student.studentId}" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal fade" role="dialog" tabindex="-1" th:id="${'editStudentModal' + student.studentId}">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Edit Student</h5>
-                        <button type="button" class="close" data-dismiss="modal">
+                        <button class="close" data-dismiss="modal" type="button">
                             <span>&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form th:action="@{/student/edit}" th:object="${studentDTO}" method="post">
-                            <input type="hidden" name="studentId" th:value="${student.studentId}"/>
-                            <input type="hidden" name="studentName" th:value="${student.studentName}"/>
+                        <form method="post" th:action="@{/students/edit}" th:object="${studentDTO}">
+                            <input name="studentId" th:value="${student.studentId}" type="hidden"/>
+                            <input name="studentName" th:value="${student.studentName}" type="hidden"/>
                             <div class="form-group">
                                 <label for="groupName">Group Name</label>
                                 <select class="form-control" id="groupName" name="groupName">
-                                    <option th:each="group : ${groups}" th:value="${group.groupName}"
-                                            th:selected="${group.groupName == student.groupName}"
-                                            th:text="${group.groupName}">
+                                    <option th:each="group : ${groups}" th:selected="${group.groupName == student.groupName}"
+                                            th:text="${group.groupName}"
+                                            th:value="${group.groupName}">
                                         Select Group
                                     </option>
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-success">Save Changes</button>
+                            <button class="btn btn-success" type="submit">Save Changes</button>
                         </form>
                     </div>
                 </div>
@@ -81,8 +81,8 @@
         </div>
     </div>
 
-    <a sec:authorize="hasAuthority('ADMIN')"
-       th:href="@{/adminscab}" class="btn btn-secondary mt-4">Go to Admin Panel</a>
+    <a class="btn btn-secondary mt-4"
+       sec:authorize="hasAuthority('ADMIN')" th:href="@{/adminscab}">Go to Admin Panel</a>
 </main>
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

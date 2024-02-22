@@ -27,14 +27,14 @@ class TestFacultyController {
     @Test
     public void listFaculties_ShouldReturnFaculties() throws Exception {
         List<Faculty> faculties = Arrays.asList(
-                new Faculty(1, "Faculty 1"),
-                new Faculty(2, "Faculty 2")
+                new Faculty(1L, "Faculty 1"),
+                new Faculty(2L, "Faculty 2")
         );
         Mockito.when(facultyService.getAllFaculties()).thenReturn(faculties);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/faculty"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/faculties"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("university/faculty"))
+                .andExpect(MockMvcResultMatchers.view().name("university/faculties"))
                 .andExpect(MockMvcResultMatchers.model().attributeExists("faculties"));
     }
 }

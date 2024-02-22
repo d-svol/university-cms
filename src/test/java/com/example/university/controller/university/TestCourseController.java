@@ -45,9 +45,9 @@ public class TestCourseController {
         when(facultyService.getAllFaculties()).thenReturn(faculties);
         when(courseService.getAllCoursesDTO()).thenReturn(courses);
 
-        mockMvc.perform(get("/course"))
+        mockMvc.perform(get("/courses"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("university/course"))
+                .andExpect(view().name("university/courses"))
                 .andExpect(model().attributeExists("courseDTO", "faculties", "courses"));
     }
 
@@ -58,7 +58,7 @@ public class TestCourseController {
 
         doNothing().when(courseService).createCourse(any(CourseDTO.class));
 
-        mockMvc.perform(post("/course/add")
+        mockMvc.perform(post("/courses/add")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                         .param("name", courseDTO.getName())
                         .param("description", courseDTO.getDescription())
@@ -66,6 +66,6 @@ public class TestCourseController {
                         .param("facultyName", String.valueOf(courseDTO.getFacultyName()))
                         .with(csrf()))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/course"));
+                .andExpect(redirectedUrl("/courses"));
     }
 }

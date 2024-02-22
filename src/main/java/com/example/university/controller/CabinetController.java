@@ -1,15 +1,15 @@
 package com.example.university.controller;
 
 
-import com.example.university.model.StudentCabinetData;
+import com.example.university.dto.StudentDTO;
 import com.example.university.model.university.Faculty;
 import com.example.university.model.university.Group;
 import com.example.university.model.user.Role;
 import com.example.university.model.user.UserEntity;
-import com.example.university.service.UserCabinetService;
 import com.example.university.service.university.FacultyService;
 import com.example.university.service.university.GroupService;
 import com.example.university.service.user.RoleService;
+import com.example.university.service.user.StudentService;
 import com.example.university.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -27,7 +27,12 @@ public class CabinetController {
     private final RoleService roleService;
     private final FacultyService facultyService;
     private final GroupService groupService;
-    private final UserCabinetService userCabinetService;
+    private final StudentService studentService;
+
+    @GetMapping("/anonymouscab")
+    public String anonymousCabinetPage(Model model) {
+        return "anonymouscab";
+    }
 
     @GetMapping("/adminscab")
     public String adminCabinetPage(Model model) {
@@ -49,13 +54,9 @@ public class CabinetController {
     @GetMapping("/studentscab")
     public String studentCabinetPage(Authentication authentication, Model model) {
         List<Group> groups = groupService.getAllGroups();
-        List<Faculty> faculties = facultyService.getAllFaculties();
-        StudentCabinetData cabinetData = userCabinetService.getStudentCabinetData(authentication.getName());
-
-        model.addAttribute("groupId", cabinetData.getGroupId());
-        model.addAttribute("groupName", cabinetData.getGroupName());
-        model.addAttribute("availableGroups", groups);
-        model.addAttribute("availableFaculties", faculties);
+        StudentDTO studentDTO = studentService.getStudentDTOByName(authentication.getName());
+        model.addAttribute("groupName", studentDTO.getGroupName());
+        model.addAttribute("username", studentDTO.getStudentName());
 
         return "studentscab";
     }

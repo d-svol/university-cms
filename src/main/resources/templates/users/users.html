@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>User Page</title>
@@ -22,10 +22,10 @@
 <body>
 <main class="container">
     <h1>User Management</h1>
-    <div th:if="${successMessage}" class="alert alert-success" th:text="${successMessage}"></div>
-    <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
-    <button sec:authorize="hasAnyAuthority('ADMIN', 'STUFF')" type="button" class="btn btn-success" data-toggle="modal"
-            data-target="#addUserModal">
+    <div class="alert alert-success" th:if="${successMessage}" th:text="${successMessage}"></div>
+    <div class="alert alert-danger" th:if="${errorMessage}" th:text="${errorMessage}"></div>
+    <button class="btn btn-success" data-target="#addUserModal" data-toggle="modal" sec:authorize="hasAnyAuthority('ADMIN', 'STUFF')"
+            type="button">
         Add User
     </button>
     <section>
@@ -51,15 +51,15 @@
                     </ul>
                 </td>
                 <td sec:authorize="hasAuthority('ADMIN')">
-                    <form th:action="@{/user/delete}" class="d-inline" method="post">
-                        <input type="hidden" name="userId" th:value="${user.id}"/>
+                    <form class="d-inline" method="post" th:action="@{/users/delete}">
+                        <input name="userId" th:value="${user.id}" type="hidden"/>
                         <button class="btn btn-danger" type="submit">Delete</button>
                     </form>
                 </td>
                 <td sec:authorize="hasAnyAuthority('ADMIN', 'STUFF')">
-                    <button type="button" class="btn btn-primary btn-sm"
+                    <button class="btn btn-primary btn-sm" data-toggle="modal"
                             th:data-target="${'#editUserModal' + user.id}"
-                            data-toggle="modal">Edit
+                            type="button">Edit
                     </button>
                 </td>
             </tr>
@@ -69,36 +69,36 @@
 
     <!-- Edit User Modal -->
     <div th:each="user: ${users}">
-        <div th:id="'editUserModal' + ${user.id}" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal fade" role="dialog" tabindex="-1" th:id="'editUserModal' + ${user.id}">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Edit Course</h5>
-                        <button type="button" class="close" data-dismiss="modal">
+                        <button class="close" data-dismiss="modal" type="button">
                             <span>&times;</span>
                         </button>
                     </div>
-                    <form th:action="@{/user/edit}" method="post">
+                    <form method="post" th:action="@{/users/edit}">
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="username">Username</label>
-                                <input type="text" class="form-control" name="username" required>
+                                <input class="form-control" name="username" required type="text">
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input type="password" class="form-control"  name="password" required>
+                                <input class="form-control" name="password" required type="password">
                             </div>
                             <div class="form-group">
                                 <label for="role">Role</label>
                                 <select class="form-control" name="roleName">
-                                    <option th:each="role : ${roles}" th:value="${role.name}"
-                                            th:text="${role.name}"></option>
+                                    <option th:each="role : ${roles}" th:text="${role.name}"
+                                            th:value="${role.name}"></option>
                                 </select>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                            <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                            <button class="btn btn-primary" type="submit">Save Changes</button>
                         </div>
                     </form>
                 </div>
@@ -107,37 +107,37 @@
     </div>
 
     <!-- Add User Modal -->
-    <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel"
-         aria-hidden="true">
+    <div aria-hidden="true" aria-labelledby="addUserModalLabel" class="modal fade" id="addUserModal" role="dialog"
+         tabindex="-1">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="addUserModalLabel">Add New User</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form th:action="@{/user/add}" method="post">
+                <form method="post" th:action="@{/users/add}">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="username">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" required>
+                            <input class="form-control" id="username" name="username" required type="text">
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" required>
+                            <input class="form-control" id="password" name="password" required type="password">
                         </div>
                         <div class="form-group">
                             <label for="role">Role</label>
                             <select class="form-control" id="role" name="roleName">
-                                <option th:each="role : ${roles}" th:value="${role.name}"
-                                        th:text="${role.name}"></option>
+                                <option th:each="role : ${roles}" th:text="${role.name}"
+                                        th:value="${role.name}"></option>
                             </select>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Add User</button>
+                        <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                        <button class="btn btn-primary" type="submit">Add User</button>
                     </div>
                 </form>
             </div>
@@ -145,7 +145,7 @@
     </div>
 
 
-    <a sec:authorize="hasAuthority('ADMIN')" class="btn btn-secondary mt-4" th:href="@{/adminscab}">Go to
+    <a class="btn btn-secondary mt-4" sec:authorize="hasAuthority('ADMIN')" th:href="@{/adminscab}">Go to
         Admin Panel</a>
 </main>
 </body>

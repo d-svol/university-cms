@@ -1,15 +1,14 @@
 package com.example.university.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-@Setter
-@Getter
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class ScheduleDTO {

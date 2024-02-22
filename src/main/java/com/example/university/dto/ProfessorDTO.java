@@ -1,13 +1,12 @@
 package com.example.university.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Setter
-@Getter
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProfessorDTO {

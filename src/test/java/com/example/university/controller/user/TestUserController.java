@@ -29,20 +29,18 @@ public class TestUserController {
     @MockBean
     private RoleService roleService;
 
-
     @Test
     public void userPage_ShouldReturnUsersAndRoles() throws Exception {
         List<UserEntity> users = Collections.singletonList(
-                new UserEntity(1L, "Name", "1234",
-                        new Role(1L, "ADMIN")));
-        List<Role> roles = Collections.singletonList(new Role());
+                new UserEntity(1L, "Name", "1234", new Role(1L, "ADMIN")));
+        List<Role> roles = Collections.singletonList(new Role(1L, "ADMIN"));
 
         Mockito.when(userService.getAllUsers()).thenReturn(users);
         Mockito.when(roleService.getAllRoles()).thenReturn(roles);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/user"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/users"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("users/user"))
+                .andExpect(MockMvcResultMatchers.view().name("users/users"))
                 .andExpect(MockMvcResultMatchers.model().attributeExists("users", "roles"));
     }
 }

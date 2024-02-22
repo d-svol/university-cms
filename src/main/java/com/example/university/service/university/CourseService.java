@@ -1,11 +1,11 @@
 package com.example.university.service.university;
 
-import com.example.university.customexception.EntityNotFoundException;
 import com.example.university.dto.CourseDTO;
 import com.example.university.model.university.Course;
 import com.example.university.model.university.Faculty;
 import com.example.university.repository.CourseRepository;
 import com.example.university.repository.FacultyRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

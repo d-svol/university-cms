@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>University Page</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .container { margin: auto; }
         .top-buffer { margin-top: 20px; }
@@ -27,29 +27,17 @@
         <tr>
             <th>University ID</th>
             <th>Name</th>
-            <th sec:authorize="hasAuthority('ADMIN')">Delete</th>
-            <th sec:authorize="hasAuthority('ADMIN')">Edit</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="university: ${university}">
             <td th:text="${university.id}"></td>
             <td th:text="${university.universityName}"></td>
-            <td sec:authorize="hasAuthority('ADMIN')">
-                <form th:action="@{/university/delete}" method="post" class="d-inline">
-                    <input type="hidden" name="universityId"/>
-                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                </form>
-            </td>
-            <td sec:authorize="hasAuthority('ADMIN')">
-                <button type="button" class="btn btn-primary btn-sm edit-btn"
-                        data-toggle="modal" data-target="#editUniversityModal">Edit
-                </button>
-            </td>
         </tr>
         </tbody>
     </table>
-    <a th:href="@{/adminscab}" sec:authorize="hasAuthority('ADMIN')" class="btn btn-secondary mt-4">Go to Admin Panel</a>
+    <a class="btn btn-secondary mt-4" sec:authorize="hasAuthority('ADMIN')" th:href="@{/adminscab}">Go to Admin
+        Panel</a>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

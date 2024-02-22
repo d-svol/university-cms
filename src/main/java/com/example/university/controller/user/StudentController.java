@@ -14,7 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/student")
+@RequestMapping("/students")
 public class StudentController {
     private final StudentService studentService;
     private final GroupService groupService;
@@ -25,13 +25,13 @@ public class StudentController {
         model.addAttribute("studentDTO", studentDTO);
         model.addAttribute("groups", groupService.getAllGroups());
         model.addAttribute("students", studentService.getAllStudents());
-        return "/users/student";
+        return "/users/students";
     }
 
     @PostMapping("edit")
     public String editStudent(@ModelAttribute StudentDTO studentDTO, RedirectAttributes redirectAttributes) {
         studentService.updateStudentGroup(studentDTO);
         redirectAttributes.addFlashAttribute("successMessage", "User successfully added.");
-        return "redirect:/student";
+        return "redirect:/students";
     }
 }

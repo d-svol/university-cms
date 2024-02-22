@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Professor CABINET</title>
+
+    <title>Anonymous CABINET</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -14,9 +16,6 @@
             padding: 20px;
         }
 
-        li {
-            list-style-type: none;
-        }
 
         .container {
             background: white;
@@ -24,11 +23,6 @@
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
-        }
-
-        form {
-            margin-top: 15px;
-            margin-bottom: 15px;
         }
 
         button {
@@ -40,24 +34,11 @@
             cursor: pointer;
         }
     </style>
-    <div th:insert="~{fragments/login-dashboard :: loginFragment}"></div>
 </head>
 <body>
-<main id="main">
+<div class="container">
+    <h1>Anonymous Panel</h1>
     <div th:replace="~{fragments/navigation.html}"></div>
-
-    <div class="container">
-        <h2 class="text-center">Manage my profile</h2>
-        <p>My Name: <span th:text="${professor.username}"></span></p>
-
-        <ul class="list-unstyled">
-            <li>
-                <form method="get" th:action="@{/professors/courses}">
-                    <button type="submit">Get my courses</button>
-                </form>
-            </li>
-        </ul>
-    </div>
-</main>
+</div>
 </body>
 </html>

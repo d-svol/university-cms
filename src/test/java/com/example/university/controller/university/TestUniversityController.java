@@ -37,9 +37,9 @@ public class TestUniversityController {
 
         given(universityService.getAllUniversities()).willReturn(universities);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/university"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/universities"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("university/university"))
+                .andExpect(MockMvcResultMatchers.view().name("university/universities"))
                 .andExpect(MockMvcResultMatchers.model().attributeExists("university"));
     }
 }
