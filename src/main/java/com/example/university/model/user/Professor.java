@@ -2,12 +2,14 @@ package com.example.university.model.user;
 
 import com.example.university.model.university.Course;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "professor")
 public class Professor {
     @Id
