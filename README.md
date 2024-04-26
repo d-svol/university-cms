@@ -1,5 +1,3 @@
-![UML діаграма](diagram.png)
-
 **User Stories:**
 
 1. **Teacher Views Daily Timetable:**
@@ -21,3 +19,5 @@
     - *Given* the user is logged in as a student.
     - *When* the user visits the "My Schedule" area.
     - *Then* the user should have the ability to view and navigate their monthly schedule for the selected month and year.
+
+![UML діаграма](diagram.png)
