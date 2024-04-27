@@ -1,10 +1,25 @@
-version: "2.2"
+version: '2'
+
 services:
+  app:
+    container_name: app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: university
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/university
+
   postgres:
-    image: "postgres:16"
+    container_name: postgres
+    image: postgres:latest
     ports:
       - "15432:5432"
     environment:
+      POSTGRES_DB: university
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 1234
-      POSTGRES_DB: university

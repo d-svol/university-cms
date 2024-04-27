@@ -1,43 +1,48 @@
-## Getting Started
+## University CMS (University Content Management System)
+### Introduction
+University CMS is a content management system designed to manage various aspects of university life, including courses, groups, schedules, faculties, and users. It provides different panels for administrators, professors, students, and other university staff.
 
+### Getting Started
 To ensure the proper functioning of the project, follow these steps
 
-1. Start Docker for easy environment setup:
+1. Start Docker for Easy Environment Setup:
 
     ```bash
-    docker-compose up
+    ./mvnw clean package -DskipTests && docker-compose up
     ```
 
+2. Stopping Docker and Removing Application Container Image:
 
-2. Run the project
+   ```bash
+    docker-compose down && docker rmi university:latest
+    ```
 
-### 3. Accessing the Application
+### Accessing the Application
 
 After successfully starting your application with Docker, open your web browser.
 Navigate to: http://localhost:8080/
-Here, you will find your application up and running.
 
-### 4. Login Credentials <br>
+### Login Credentials <br>
 
 #### Admin Panel <br>
 
-Username: admin <br>
-Password: admin <br>
+      Username: admin
+      Password: admin
 
 #### Student Panel <br>
 
-Username: student <br>
-Password: student <br>
+      Username: student
+      Password: student
 
 #### Professor Panel <br>
 
-Username: professor <br>
-Password: professor <br>
+      Username: professor
+      Password: professor
 
 #### Professor Panel <br>
 
-Username: stuff <br>
-Password: stuff <br>
+      Username: stuff
+      Password: stuff
 
 ## Other Important Steps
 
