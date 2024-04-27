@@ -1,5 +1,3 @@
-![UML Diagram](diagram.png)
-
 ## Getting Started
 
 To ensure the proper functioning of the project, follow these steps
@@ -75,3 +73,5 @@ Password: stuff <br>
 5. **Student:**
     - *Given* the user is logged in as **Student**.
     - *Then* **read** information about universities / professors / students / courses / groups / faculties / schedules.
+
+![UML діаграма](diagram.png)
