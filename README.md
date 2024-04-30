@@ -1,6 +1,6 @@
 ## University CMS (University Content Management System)
 
-### Introduction
+### Description
 University CMS is a content management system designed to manage various aspects of university life, including courses, groups, schedules, faculties, and users. It provides different panels for administrators, professors, students, and other university staff.
 ***
 ### Role-Based Access Control (RBAC) 
