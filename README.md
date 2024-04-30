@@ -2,10 +2,8 @@
 
 ### Introduction
 University CMS is a content management system designed to manage various aspects of university life, including courses, groups, schedules, faculties, and users. It provides different panels for administrators, professors, students, and other university staff.
-
-## Other Important Steps
-
-**User Stories:**
+***
+### Role-Based Access Control (RBAC) 
 
 1. **Anonymous:**
    - *Given* the user is not logged in.
@@ -37,6 +35,7 @@ University CMS is a content management system designed to manage various aspects
 5. **Student:**
    - *Given* the user is logged in as **Student**.
    - *Then* **read** information about universities / professors / students / courses / groups / faculties / schedules.
+***
 
 ### Getting Started
 To ensure the proper functioning of the project, follow these steps
@@ -46,17 +45,17 @@ To ensure the proper functioning of the project, follow these steps
     ```bash
     ./mvnw clean package -DskipTests && docker-compose up
     ```
+2. Explore Endpoints
+      - Open your web browser and navigate to http://localhost:8080/
 
-2. Stopping Docker and Removing Application Container Image:
+      
+3. Stopping Docker and Removing Application Container Image:
 
    ```bash
     docker-compose down && docker rmi university:latest
     ```
 
-### Accessing the Application
-
-After successfully starting your application with Docker, open your web browser.
-Navigate to: http://localhost:8080/
+***
 
 ### Login Credentials <br>
 
