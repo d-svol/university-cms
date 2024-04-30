@@ -28,7 +28,7 @@ public class ProfessorController {
         List<ProfessorDTO> professorDTOs = professorService.getAllProfessorDTOs();
         model.addAttribute("professors", professorDTOs);
         model.addAttribute("courses", courseService.getAllCoursesDTO());
-        return "/users/professors";
+        return "users/professors";
     }
 
     @PostMapping("/edit")

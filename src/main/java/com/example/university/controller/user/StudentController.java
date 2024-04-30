@@ -25,7 +25,7 @@ public class StudentController {
         model.addAttribute("studentDTO", studentDTO);
         model.addAttribute("groups", groupService.getAllGroups());
         model.addAttribute("students", studentService.getAllStudents());
-        return "/users/students";
+        return "users/students";
     }
 
     @PostMapping("edit")
